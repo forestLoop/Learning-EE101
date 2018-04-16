@@ -1,0 +1,103 @@
+#searchResult{
+
+    font-size: 25px;
+    color:black;
+    text-align: left;
+    border-collapse: collapse;
+
+}
+td ul{
+    list-style:none;
+    padding: 0;
+
+}
+#superCenter{
+    position: absolute;
+    width: 95%;
+    top: 50%;
+    transform: translate(0,-150%);
+}
+#homepage{
+    font-size:25px;
+}
+#authorname{
+    text-align: center;
+    width:50%;
+    height:50px;
+    font-size: 25px;
+}
+#noResult{
+    font-size:30px;
+    color: gray;
+    margin-top: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+#homeSubmit{
+    text-align: center;
+    background-color: #007fff;
+    color: white;
+    width:10%;
+    height:50px;
+    font-size: 25px;
+    border-style: none;
+}
+h1{
+    font-size: 40px;
+    text-align: center;
+}
+#widenColumn{
+    min-width: 25%;
+    text-align: center;
+}
+
+#narrowedColumn{
+    width: 40%;
+}
+
+#photo{
+    height: 200px;
+    width:200px;
+    float: left;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+#profile{
+    font-size: 25px;
+    margin-right:6%;
+    margin-left: 6%;
+    text-indent:3%;
+}
+
+#papers{
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 6%;
+    font-size: 25px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+td{
+    border-top: 1px;
+    border-bottom: 1px;
+    border-left: 0;
+    border-right: 0;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+a:active {
+    text-decoration: none;
+}
