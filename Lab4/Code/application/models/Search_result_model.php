@@ -21,15 +21,23 @@ class Search_result_model extends CI_Model{
 
     }
 
-    public function get_search_result($authorname="",$begin=0,$end=10)
+    public function get_result_number($authorname="")
+    {
+        $queryForResultNumber=$this->db->query(
+            "SELECT count(*) AS num FROM authors WHERE authorname LIKE '%$authorname%'");
+        $result=$queryForResultNumber->result_array();
+        return $result[0]["num"];
+    }
+
+    public function get_search_result($authorname="",$begin=0,$num=10)
     {
         $queryForAuthor=$this->db->query(
             "SELECT authors.*,paper_author_affiliation.num
             FROM authors,
                 (SELECT authorid,count(1) AS num FROM paper_author_affiliation GROUP BY authorid)paper_author_affiliation
             WHERE authors.authorid=paper_author_affiliation.authorid AND authors.authorname LIKE '%$authorname%'
-            ORDER BY num DESC
-            LIMIT $begin,$end;"
+            ORDER BY num DESC, authors.authorname ASC
+            LIMIT $begin,$num;"
         );
         if(!$queryForAuthor->result_array())
             return NULL;
