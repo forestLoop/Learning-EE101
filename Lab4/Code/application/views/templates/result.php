@@ -4,7 +4,7 @@
         $affiliationName=$affiliationName ?ucwords($affiliationName): "None";
         $affiliationID=$affiliationID??"00000000";
         $authorName=ucwords($authorName);
-        echo "    <tr>
+        echo "    <tr class='dataRow'>
         <td class='AuthorName'><a href='/author/$authorID'>$authorName</a></td>
         <td class='PaperNum'>$paperNum</td>
         <td class='AffiliationName'><ul><li><a href='/affiliation/$affiliationID'>$affiliationName</a></li></ul></td>
@@ -25,7 +25,10 @@
           }
         ?>
     </table>
-    <button type="button" id="resultPrev">Previous</button>
-    <button type="button" id="resultNext">Next</button>
+    <div id="pagination">
+        <button type="button" id="resultPrev" disabled="disabled">Previous</button>
+        <span id="pageInfo">Page <span id="currentPage"><?php echo $currentPage?></span> of <?php echo $maxPage ?></span>
+        <button type="button" id="resultNext">Next</button>
+    </div>
 </div>
 

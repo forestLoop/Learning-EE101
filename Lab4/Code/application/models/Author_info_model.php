@@ -10,10 +10,10 @@ class Author_info_model extends CI_Model{
     private function handle_one_paper($row)
     {
         $temp["paperID"]=$row["PaperID"];
-        $temp["paperTitle"]=$row["Title"];
+        $temp["paperTitle"]=ucwords($row["Title"]);
         $temp["paperPublishYear"]=$row["PaperPublishYear"];
         $temp["conferenceID"]=$row["ConferenceID"];
-        $temp["conferenceName"]=$row["ConferenceName"];
+        $temp["conferenceName"]=ucwords($row["ConferenceName"]);
         $temp["citation"]=$row["citation"] ?? 0;
         $temp["authors"]=$this->get_paper_author($row["PaperID"]);
         return $temp;
@@ -29,7 +29,7 @@ class Author_info_model extends CI_Model{
         );
         $authors=array();
         foreach ( $queryForAuthors->result_array() as $subAuthor) {
-            $temp["subAuthorName"]=$subAuthor["AuthorName"];
+            $temp["subAuthorName"]=ucwords($subAuthor["AuthorName"]);
             $temp["subAuthorID"]=$subAuthor["AuthorID"];
             $temp["subAuthorSequence"]=$subAuthor["AuthorSequence"];
             array_push($authors, $temp);

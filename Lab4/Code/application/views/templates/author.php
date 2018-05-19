@@ -25,7 +25,7 @@
     <?php
         foreach ($author_info["papers"] as $paper) {
             echo '
-        <tr>
+        <tr class="dataRow">
             <td class="PaperTitle">'.ucwords($paper["paperTitle"]).'</td>
             <td class="PublishYear">'.$paper["paperPublishYear"].'</td>
             <td class="Conference">'.$paper["conferenceName"].'</td>
@@ -44,4 +44,10 @@
         }
     ?>
     </table>
+        <div id="pagination">
+            <button type="button" id="papersPrev" disabled="disabled">Previous</button>
+            <span id="pageInfo">Page <span id="currentPage"><?php echo $currentPage?></span> of <?php echo $maxPage ?></span>
+            <button type="button" id="papersNext">Next</button>
+        </div>
     </div>
+

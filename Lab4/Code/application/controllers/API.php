@@ -37,6 +37,7 @@ class API extends CI_Controller{
 					$json["pageSize"]=$pageSize;
 					$json["maxPage"]=$maxPage;
 					$json["page"]=$page;
+					$json["itemNum"]=0;
 				}else{
 					$json["success"]=1;
 					$json["resultNum"]=$resultNum;
@@ -46,6 +47,7 @@ class API extends CI_Controller{
 					$begin=$pageSize*($page-1);
 					$json["searchResult"] = 
 						$this->Search_result_model->get_search_result($query,$begin,$pageSize);
+					$json["itemNum"]=count($json["searchResult"]);
 				}
 			}
 		}
@@ -82,6 +84,7 @@ class API extends CI_Controller{
 					$json["page"]=$page;
 					$begin=$pageSize*($page-1);
 					$json["papers"]=$this->Author_info_model->get_author_info($ID,$begin,$pageSize,$paperNum)["papers"];
+					$json["itemNum"]=count($json["papers"]);
 				}
 			}
 		}

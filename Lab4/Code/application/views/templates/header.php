@@ -8,7 +8,13 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/static/js/main.js"></script>
+    <?php 
+    if(isset($script)){
+    	echo "<script>";
+    	echo $script;
+    	echo "</script>\n";
+    }
+    ?>
 </head>
 <body>
     <h1><?php echo $title; ?></h1>
-

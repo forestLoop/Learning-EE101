@@ -44,8 +44,8 @@ class Search_result_model extends CI_Model{
         else{
             $result=array();
             foreach($queryForAuthor->result_array() as $row){
-                $singleAuthor["authorID"]=$row["AuthorID"];
-                $singleAuthor["authorName"]=$row["AuthorName"];
+                $singleAuthor["authorID"]=ucwords($row["AuthorID"]);
+                $singleAuthor["authorName"]=ucwords($row["AuthorName"]);
                 $singleAuthor["paperNum"]=$row["num"];
                 $queryForAffiliation=$this->db->query(
                     "SELECT affiliations.*
@@ -59,8 +59,8 @@ class Search_result_model extends CI_Model{
                     LIMIT 1;"
                 );
                 $rowAff=$queryForAffiliation->row_array();
-                $singleAuthor["affiliationID"]=$rowAff["AffiliationID"];
-                $singleAuthor["affiliationName"]=$rowAff["AffiliationName"];
+                $singleAuthor["affiliationID"]=$rowAff["AffiliationID"]??"00000000";
+                $singleAuthor["affiliationName"]=($rowAff["AffiliationName"])?ucwords($rowAff["AffiliationName"]):"NULL";
                 array_push($result, $singleAuthor);
             }
             return $result;

@@ -47,11 +47,24 @@ class Page extends CI_Controller{
             $authorname=str_replace("%20", " ", $authorname);
             $data["title"]="Result of ".ucwords($authorname);
             $data["resultNum"]=$this->Search_result_model->get_result_number($authorname);
+            $maxPage=(int)(($data["resultNum"]-1)/10)+1;
+            $data["script"]= "
+        currentPage=1;
+        maxPage=$maxPage;
+        pageSize=10;
+        query='$authorname';
+        apiUrl='/api/search';
+        $(function(){
+            checkButtonStatus('#resultPrev','#resultNext');
+            });
+    ";
             $this->load->view("templates/header.php",$data);
             if($data["resultNum"]==0){
                 $data["errorMsg"]="No Result Found!";
                 $this->load->view("templates/error.php",$data);
             }else{
+                $data["currentPage"]=1;
+                $data["maxPage"]=$maxPage;
                 $data["searchResult"]=$this->Search_result_model->get_search_result($authorname);
                 $this->load->view("templates/result.php",$data);
             }
@@ -72,6 +85,19 @@ class Page extends CI_Controller{
         }else{
             $data["author_info"]=$this->Author_info_model->get_author_info($authorID);
             $data["paperNum"]=$this->Author_info_model->get_paper_number($authorID)["all"];
+            $data["currentPage"]=1;
+            $maxPage=(int)(($data["paperNum"]-1)/10)+1;
+            $data["maxPage"]=$maxPage;
+            $data["script"]= "
+        currentPage=1;
+        maxPage=$maxPage;
+        pageSize=10;
+        query='$authorID';
+        apiUrl='/api/papers';
+        $(function(){
+            checkButtonStatus('#papersPrev','#papersNext');
+            });
+    ";
             if($data["author_info"]==NULL){
                 $data["title"]="Error";
                 $data["errorMsg"]="Invalid Author ID!";
