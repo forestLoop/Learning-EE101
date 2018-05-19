@@ -46,12 +46,13 @@ class Page extends CI_Controller{
         }else{
             $authorname=str_replace("%20", " ", $authorname);
             $data["title"]="Result of ".ucwords($authorname);
-            $data["searchResult"]=$this->Search_result_model->get_search_result($authorname);
+            $data["resultNum"]=$this->Search_result_model->get_result_number($authorname);
             $this->load->view("templates/header.php",$data);
-            if(!$data["searchResult"]){
-                $data["errorMsg"]="No Author Found!";
+            if($data["resultNum"]==0){
+                $data["errorMsg"]="No Result Found!";
                 $this->load->view("templates/error.php",$data);
             }else{
+                $data["searchResult"]=$this->Search_result_model->get_search_result($authorname);
                 $this->load->view("templates/result.php",$data);
             }
             $this->load->view("templates/footer.php");
@@ -70,6 +71,7 @@ class Page extends CI_Controller{
             $this->load->view("templates/footer.php");
         }else{
             $data["author_info"]=$this->Author_info_model->get_author_info($authorID);
+            $data["paperNum"]=$this->Author_info_model->get_paper_number($authorID)["all"];
             if($data["author_info"]==NULL){
                 $data["title"]="Error";
                 $data["errorMsg"]="Invalid Author ID!";

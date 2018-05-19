@@ -1,94 +1,4 @@
-#searchResult{
-
-    font-size: 25px;
-    color:black;
-    text-align: left;
-    border-collapse: collapse;
-
-}
-td ul{
-    list-style:none;
-    padding: 0;
-
-}
-#superCenter{
-    position: absolute;
-    width: 95%;
-    top: 50%;
-    transform: translate(0,-150%);
-}
-#homepage{
-    font-size:25px;
-}
-#authorname{
-    text-align: center;
-    width:50%;
-    height:50px;
-    font-size: 25px;
-}
-#noResult{
-    font-size:30px;
-    color: gray;
-    margin-top: 50px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%,0);
-}
-#homeSubmit{
-    text-align: center;
-    background-color: #007fff;
-    color: white;
-    width:10%;
-    height:50px;
-    font-size: 25px;
-    border-style: none;
-}
-h1{
-    font-size: 40px;
-    text-align: center;
-}
-#widenColumn{
-    min-width: 25%;
-    text-align: center;
-}
-
-#narrowedColumn{
-    width: 40%;
-}
-
-#photo{
-    height: 200px;
-    width:200px;
-    float: left;
-    margin-left: 6%;
-    margin-right: 6%;
-}
-
-#profile{
-    font-size: 25px;
-    margin-right:6%;
-    margin-left: 6%;
-    text-indent:3%;
-}
-
-#papers{
-    margin-left: 6%;
-    margin-right: 6%;
-    margin-top: 6%;
-    font-size: 25px;
-    text-align: left;
-    border-collapse: collapse;
-}
-
-td{
-    border-top: 1px;
-    border-bottom: 1px;
-    border-left: 0;
-    border-right: 0;
-    border-style: solid;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
+/*General*/
 a:link {
     text-decoration: none;
 }
@@ -101,3 +11,182 @@ a:hover {
 a:active {
     text-decoration: none;
 }
+h1{
+    font-size: 40px;
+    text-align: center;
+}
+button{
+    margin-top: 20px;
+    background-color: white;
+    border-style: solid;
+    border-color: gray;
+    border-width: 1px;
+    color: black;
+    font-size: 25px;
+    height:50px;
+    width:15%;
+}
+button:hover{
+    background-color: #007fff;
+    border-style: none;
+    font-size: 30px;
+    color: white;
+}
+
+td{
+    border-top: 1px;
+    border-bottom: 1px;
+    border-left: 0;
+    border-right: 0;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/*Home Page*/
+#superCenter{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translate(0,-150%);
+}
+#homepage{
+    font-size:25px;
+}
+#homeSubmit{
+    text-align: center;
+    background-color: #007fff;
+    color: white;
+    width:10%;
+    height:50px;
+    font-size: 25px;
+    border-style: none;
+}
+#homeInput{
+    text-align: center;
+    width:50%;
+    height:50px;
+    font-size: 25px;
+}
+
+/*Search Result*/
+#searchResult{
+    font-size:25px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+}
+#overallResult{
+    color:gray;
+}
+#resultTable{
+    font-size: 25px;
+    width:100%;
+    color:black;
+    text-align: left;
+    border-collapse: collapse;
+}
+.AuthorName{
+    width:30%;
+}
+
+.PaperNum{
+    width:20%;
+    text-align: center;
+}
+
+.AffiliationName{
+    width:50%;
+}
+
+.AffiliationName ul{
+    list-style: none;
+    padding:0;
+}
+
+#noResult{
+    font-size:30px;
+    color: gray;
+    margin-top: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+#resultNext{
+    float: right;
+}
+#resultPrev{
+    float:left;
+}
+
+
+
+/*Author Page*/
+#authorPage{
+    font-size:25px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+}
+
+
+#authorProfile{
+    text-indent:3%;
+    height:200px;
+}
+
+#authorPhoto{
+    height: 200px;
+    width:200px;
+    float: left;
+}
+
+#authorDescription{
+    margin-left: 225px;
+    height:inherit;
+    overflow: auto;
+}
+
+#papersTable{
+    text-align: left;
+    border-collapse: collapse;
+    width:100%;
+}
+
+.PaperTitle{
+    width:40%;
+}
+
+.PublishYear{
+    width:10%;
+    text-align: center;
+}
+
+.Conference{
+    width:10%;
+    text-align: center;
+}
+
+.Citations{
+    width:10%;
+    text-align: center;
+}
+
+.Authors{
+    width:30%;
+}
+
+.Authors ol{
+    padding-left: 25px;
+}
+
+td{
+    border-top: 1px;
+    border-bottom: 1px;
+    border-left: 0;
+    border-right: 0;
+    border-style: solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
