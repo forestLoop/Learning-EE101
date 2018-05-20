@@ -92,6 +92,15 @@ class API extends CI_Controller{
 		$this->load->view("templates/json.php",$data);
 	}
 
+	public function graph($query=NULL,$type=1)
+	{
+		$data=array();
+		$json=array();
+		if($query!=NULL){
+			
+		}
+	}
+
 }
 
  ?>

@@ -16,6 +16,20 @@ h1{
     text-align: center;
 }
 
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+g text {
+  display: none;
+  font-size: 15px;
+}
 
 button{
     margin-top: 20px;
@@ -224,3 +238,9 @@ td{
     float: right;
     margin-top: 0;
 }
+
+#graph{
+    width:100%;
+}
+
+

@@ -44,10 +44,12 @@
         }
     ?>
     </table>
-        <div id="pagination">
-            <button type="button" id="papersPrev" disabled="disabled">Previous</button>
-            <span id="pageInfo">Page <span id="currentPage"><?php echo $currentPage?></span> of <?php echo $maxPage ?></span>
-            <button type="button" id="papersNext">Next</button>
-        </div>
+    <div id="pagination">
+        <button type="button" id="papersPrev" disabled="disabled">Previous</button>
+        <span id="pageInfo">Page <span id="currentPage"><?php echo $currentPage?></span> of <?php echo $maxPage ?></span>
+        <button type="button" id="papersNext">Next</button>
     </div>
-
+    <div id="graph">
+        <svg id="forceGraph" width="800" height="600" align="center"></svg> 
+    </div>
+</div>
