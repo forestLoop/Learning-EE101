@@ -97,7 +97,9 @@ class API extends CI_Controller{
 		$data=array();
 		$json=array();
 		if($query!=NULL){
-			
+			$json=$this->Author_info_model->get_graph_data($query);
+			$data["json"]=$json;
+			$this->load->view("templates/json.php",$data);
 		}
 	}
 

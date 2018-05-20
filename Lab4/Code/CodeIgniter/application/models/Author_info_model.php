@@ -186,6 +186,77 @@ class Author_info_model extends CI_Model{
         return $result;
     }
 
+    public function get_author_name($authorID)
+    {
+        $queryForName=$this->db->query("SELECT * FROM authors WHERE authorid='$authorID';");
+        $row=$queryForName->row_array();
+        if($row)
+            return ucwords($row["AuthorName"]);
+        else
+            return NULL;
+
+    }
+    public function get_related_authors($authorID=NULL)
+    {
+        if($authorID==NULL)
+            return NULL;
+        $result=array();
+        $queryForRelatedAuthors=$this->db->query(
+            "SELECT * FROM author_relationship WHERE authorid1='$authorID';");
+        foreach($queryForRelatedAuthors->result_array() as $row){
+            array_push($result, array($row["AuthorID2"],$row["CooperationTimes"],$row["Relationship"]));
+        }
+        $queryForRelatedAuthors=$this->db->query(
+            "SELECT * FROM author_relationship WHERE authorid2='$authorID';");
+        foreach($queryForRelatedAuthors->result_array() as $row){
+            array_push($result, array($row["AuthorID1"],$row["CooperationTimes"],-$row["Relationship"]));
+        }
+        return $result;
+    }
+
+    public function get_relationship($authorID1,$authorID2)
+    {
+        $queryForRelationship=$this->db->query(
+        "SELECT * FROM author_relationship WHERE authorid1='$authorID1' AND authorid2='$authorID2';");
+        $row=$queryForRelationship->row_array();
+        if($row)
+            return array($row["CooperationTimes"],$row["Relationship"]);
+        else
+            return NULL;
+    }
+
+    public function get_graph_data($authorID=NULL)
+    {
+        if($authorID==NULL)
+            return NULL;
+        $result=array();
+        $nodes=array();
+        $links=array();
+        array_push($nodes, 
+            array("id"=>$authorID,"authorName"=>$this->get_author_name($authorID),"group"=>0));
+        $allAuthors=$this->get_related_authors($authorID);
+        foreach($allAuthors as $relatedAuthor){
+            array_push($nodes, 
+                array("id"=>$relatedAuthor[0],
+                    "authorName"=>$this->get_author_name($relatedAuthor[0]),
+                    "group"=>2+$relatedAuthor[2]
+                )
+            );
+            array_push($links,array("source"=>$authorID,"target"=>$relatedAuthor[0],"value"=>$relatedAuthor[1]));
+        }
+        for($i=0,$len=count($allAuthors);$i<$len;$i++)
+            for($j=$i+1;$j<$len;$j++){
+                $authorID1=$allAuthors[$i][0];
+                $authorID2=$allAuthors[$j][0];
+                $relation=$this->get_relationship($authorID1,$authorID2);
+                if($relation){
+                    array_push($links,array("source"=>$authorID1,"target"=>$authorID2,"value"=>$relation[0]));
+                }
+            }
+        $result["nodes"]=$nodes;
+        $result["links"]=$links;
+        return $result;
+    }
 }
 
 ?>

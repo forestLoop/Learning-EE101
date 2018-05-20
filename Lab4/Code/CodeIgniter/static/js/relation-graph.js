@@ -4,7 +4,26 @@ var svg = d3.select("svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
 
-var color = d3.scaleOrdinal(d3.schemeCategory20);
+//var color = d3.scaleOrdinal(d3.schemeCategory20);
+//var color=d3.scaleOrdinal(['#25c6fc','#e03636','#edd0be','#5d9431'])
+
+function color(d)
+{
+  return ['#25c6fc','#e03636','#edd0be','#5d9431'][d]
+}
+var target = document.getElementById('graph');
+var opts = {
+  lines: 9, // The number of lines to draw
+  length: 9, // The length of each line
+  width: 5, // The line thickness
+  radius: 14, // The radius of the inner circle
+  color: '#007fff', // #rgb or #rrggbb or array of colors
+  speed: 1.9, // Rounds per second
+  trail: 40, // Afterglow percentage
+  className: 'spinner', // The CSS class to assign to the spinner
+};
+var spinner = new Spinner(opts);
+spinner.spin(target);
 
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
@@ -17,7 +36,7 @@ console.log(jsonSource);
 
 d3.json("/api/graph/"+query+"/1", function(error, graph) {
   if (error) throw error;
-
+  //spinner.stop();
   var link = svg.append("g")
       .attr("class", "links")
     .selectAll("line")
@@ -43,7 +62,7 @@ d3.json("/api/graph/"+query+"/1", function(error, graph) {
 
   var lables = node.append("text")
       .text(function(d) {
-        return d.id;
+        return d.authorName;
       })
       .attr('x', 6)
       .attr('y', 3);
