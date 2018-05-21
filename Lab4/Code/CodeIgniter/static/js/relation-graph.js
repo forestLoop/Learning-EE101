@@ -22,8 +22,8 @@ var opts = {
   trail: 40, // Afterglow percentage
   className: 'spinner', // The CSS class to assign to the spinner
 };
-var spinner = new Spinner(opts);
-spinner.spin(target);
+//var spinner = new Spinner(opts);
+//spinner.spin(target);
 
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }))

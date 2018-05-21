@@ -246,8 +246,10 @@ class Author_info_model extends CI_Model{
         }
         for($i=0,$len=count($allAuthors);$i<$len;$i++)
             for($j=$i+1;$j<$len;$j++){
-                $authorID1=$allAuthors[$i][0];
-                $authorID2=$allAuthors[$j][0];
+                //$authorID1=$allAuthors[$i][0]; 
+                //$authorID2=$allAuthors[$j][0];
+                $authorID1=min($allAuthors[$i][0],$allAuthors[$j][0]);
+                $authorID2=max($allAuthors[$i][0],$allAuthors[$j][0]);
                 $relation=$this->get_relationship($authorID1,$authorID2);
                 if($relation){
                     array_push($links,array("source"=>$authorID1,"target"=>$authorID2,"value"=>$relation[0]));
