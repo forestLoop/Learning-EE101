@@ -71,7 +71,7 @@ def get_all_papers(db_cursor):
         for i in range(result_num):
             yield db_cursor.fetchone()[0]
     except:
-        print("ERROR")
+        print("ERROR when trying to get all papers.")
 
 
 @timer

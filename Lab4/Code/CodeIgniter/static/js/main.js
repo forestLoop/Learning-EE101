@@ -9,6 +9,7 @@ var currentPage,maxPage,pageSize;
 var query;
 var apiUrl;
 
+
 function fillResultTableWithJSON(data)
 {
 	$(".dataRow").each(function(index,el){

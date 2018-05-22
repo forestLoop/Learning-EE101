@@ -34,7 +34,7 @@ var type=1;
 var jsonSource=["/api/graph",query,type].join("/");
 console.log(jsonSource);
 
-d3.json("/api/graph/"+query+"/1", function(error, graph) {
+d3.json(jsonSource, function(error, graph) {
   if (error) throw error;
   //spinner.stop();
   var link = svg.append("g")
