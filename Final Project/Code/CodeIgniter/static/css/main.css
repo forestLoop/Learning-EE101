@@ -10,6 +10,9 @@ body{
     background-image: url(/static/img/bg.png);
     font-size: 25px;
     font-family: 'Quicksand', sans-serif;
+    width:100%;
+    min-width: 1000px;
+    margin:0;
 }
 a {
     text-decoration: none;

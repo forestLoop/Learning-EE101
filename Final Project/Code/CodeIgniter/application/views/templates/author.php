@@ -12,7 +12,12 @@
         }
     ?>
     <div id="graph">
-        <svg id="forceGraph" width="800" height="600"></svg> 
+        <svg id="forceGraph" width="800" height="600"></svg>
+        <script src="/static/js/jquery.svg3dtagcloud.js"></script>
+        <script>
+            myTagCloud("#graph");
+        </script>
+        <svg id="tg" width=480 height=480></svg>
     </div>
     <div id="overallResult">
         <p><?php echo "$paperNum papers are found." ?></p>
