@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title; ?></title>
+    <link rel="stylesheet" href="/static/js/jquery-ui.min.css"></script>
     <link rel="stylesheet" href="/static/css/main.css">
 <!--
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -27,4 +28,14 @@
     ?>
 </head>
 <body>
+    <div id="navBar">
+        <ul>
+            <li><a class="active" href="/">Home</a></li>
+            <li><a href="/author">Author</a></li>
+            <li><a href="/paper">Paper</a></li>
+            <li><a href="/conference">Conference</a></li>
+            <li><a href="/affiliation">Affiliation</a></li>
+            <li style="float:right;"><a href="/about">About</a></li>
+        </ul>
+    </div>
     <h1><?php echo $title; ?></h1>

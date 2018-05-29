@@ -1,7 +1,7 @@
 /* Optional Colors:
     #8e44ad Purple
     #e74c3c Red
-    #1abc9c Green
+    #1abc9c Green <-- Currently used
 */
 
 /*General*/
@@ -11,9 +11,11 @@ body{
     font-size: 25px;
     font-family: 'Quicksand', sans-serif;
     width:100%;
-    min-width: 1000px;
+    height:100%;
+    min-width: 1300px;
     margin:0;
 }
+
 a {
     text-decoration: none;
     color:#1abc9c;
@@ -75,8 +77,6 @@ button:disabled{
 }
 
 
-
-
 td{
     border-top: 1px;
     border-bottom: 1px;
@@ -87,7 +87,50 @@ td{
     padding-bottom: 5px;
 }
 
+/*Navigation Bar*/
+#navBar{
+    /*position: fixed;
+    top: 0;*/
+    width:100%;
+}
+
+#navBar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#navBar li {
+    float: left;
+}
+
+#navBar .active{
+    background-color: #1abc9c;
+}
+
+#navBar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navBar li a:hover {
+    background-color: #1abc9c;
+}
+
+
+
 /*Home Page*/
+
+#magicWrapper{
+    position: relative;
+    height: 600px;
+}
+
 .error{
     font-size: 20px;
     width:60%;
@@ -101,29 +144,56 @@ td{
     border-radius: 4px;
 }
 #superCenter{
-    position: absolute;
+    /* position: absolute;
     width: 100%;
     top: 50%;
-    transform: translate(0,-100%);
+    transform: translate(0,-100%); */
+    position: relative;
+    width:100%;
+    top: 50%;
+    transform: translateY(-50%);
 }
+
 #homeSearch{
     font-size:25px;
 }
+
 #homeSubmit{
     text-align: center;
     background-color: #1abc9c;
     color: white;
     width:10%;
-    height:50px;
-    font-size: 25px;
+    height:51px;
+    font-size: 30px;
+    font-family: inherit;
     border-style: none;
+    margin-top:0.5px;
 }
 #homeInput{
     text-align: center;
     width:50%;
     height:50px;
     font-size: 25px;
+    font-family: inherit;
+    margin-top:0;
+    padding: 0;
 }
+
+#homeInput::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #8c8c8c;
+
+}
+#homeInput:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #8c8c8c;
+}
+#homeInput::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #8c8c8c;
+}
+#homeInput:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #8c8c8c;
+}
+
+
 
 
 
