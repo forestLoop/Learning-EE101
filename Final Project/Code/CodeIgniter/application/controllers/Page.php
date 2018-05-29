@@ -15,13 +15,22 @@ class Page extends CI_Controller{
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->form_validation->set_rules('queryString', 'Query String', 'required');
-        $this->form_validation->set_rules('type','Search Type','required');
+        $this->form_validation->set_rules('type[]','Search Type','required');
         if ($this->form_validation->run() === FALSE){
             $this->load->view('templates/home.php');
         }
         else{
             $queryString=$this->input->post("queryString");
-            redirect("/result/$queryString/");
+            $type="";
+            $allTypes=array("author","paper","conference","affiliation");
+            for($i=0;$i!=4;$i++){
+                if(in_array($allTypes[$i],$this->input->post("type[]"))){
+                    $type.="1";
+                }
+                else
+                    $type.="0";
+            }
+            redirect("/result/$queryString?type=$type");
         }
 
 
@@ -35,19 +44,43 @@ class Page extends CI_Controller{
         }
     }
 
-    public function result($authorname=NULL)
+    public function result($query=NULL)
     {
 
-        if(!$authorname){
+        if(!$query){
             $data["title"]="Error";
-            $data["errorMsg"]="Invalid Author Name!";
+            $data["errorMsg"]="Invalid Query!";
             $this->load->view("templates/header.php",$data);
             $this->load->view("templates/error.php",$data);
             $this->load->view("templates/footer.php");
         }else{
-            $authorname=str_replace("%20", " ", $authorname);
-            $data["title"]="Result of ".ucwords($authorname);
-            $data["resultNum"]=$this->Search_result_model->get_result_number($authorname);
+            $queryString=str_replace("%20", " ", $query);
+            $type=$this->input->get_post("type")??"1111";
+            $data["title"]="Search result of ".ucwords($queryString);
+            if($type[0]){
+                $data["authorNum"]=$this->Search_result_model->get_author_number($queryString);
+                $data["authorResult"]=$this->Search_result_model->get_author_result($queryString);
+            }
+            if($type[1]){
+                $data["paperNum"]=$this->Search_result_model->get_paper_numer($queryString);
+                $data["paperResult"]=$this->Search_result_model->get_paper_result($queryString);
+            }
+            if($type[2]){
+                $data["paperNum"]=$this->Search_result_model->get_conference_number($queryString);
+                $data["conferenceResult"]=$this->Search_result_model->get_conference_result($queryString);
+            }
+            if($type[3]){
+                $data["affiliationNum"]=$this->Search_result_model->get_affiliation_number($queryString);
+                $data["affiliationResult"]=
+                    $this->Search_result_model->get_affiliation_result($queryString);
+            }
+            $this->load->view("templates/header.php",$data);
+            $this->load->view("templates/result.php",$data);
+            $this->load->view("templates/footer.php");
+        }   
+    }
+    /*
+    $data["resultNum"]=$this->Search_result_model->get_result_number($authorname);
             $maxPage=(int)(($data["resultNum"]-1)/10)+1;
             $data["script"]= "
         currentPage=1;
@@ -57,7 +90,7 @@ class Page extends CI_Controller{
         apiUrl='/api/search';
         $(function(){
             checkButtonStatus('#resultPrev','#resultNext');
-            });
+        });
     ";
             $this->load->view("templates/header.php",$data);
             if($data["resultNum"]==0){
@@ -72,8 +105,7 @@ class Page extends CI_Controller{
             $this->load->view("templates/footer.php");
 
         }
-
-    }
+*/
 
     public function author($authorID=NULL)
     {

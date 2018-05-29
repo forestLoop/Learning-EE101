@@ -21,7 +21,7 @@ class Search_result_model extends CI_Model{
 
     }
 
-    public function get_result_number($authorname="")
+    public function get_author_number($authorname=NULL)
     {
         $queryForResultNumber=$this->db->query(
             "SELECT count(*) AS num FROM authors WHERE authorname LIKE '%$authorname%'");
@@ -29,8 +29,11 @@ class Search_result_model extends CI_Model{
         return $result[0]["num"];
     }
 
-    public function get_search_result($authorname="",$begin=0,$num=10)
+
+    public function get_author_result($authorname=NULL,$begin=0,$num=10)
     {
+        if(!$authorname)
+            return NULL;
         $queryForAuthor=$this->db->query(
             "SELECT authors.*,paper_author_affiliation.num
             FROM authors,
@@ -65,7 +68,46 @@ class Search_result_model extends CI_Model{
             }
             return $result;
         }
+    }
 
+    public function get_paper_number($paperTitle=NULL)
+    {
+        $queryForPaperNumber=$this->db->query(
+            "SELECT count(*) AS num FROM papers WHERE title LIKE '%$paperTitle%';");
+        $result=$queryForPaperNumber->result_array();
+        return $result[0]["num"];
+    }
+
+    public function get_authors_of_paper($paperID=NULL)
+    {
+        $queryForAuthorsOfPaper=$this->db->query(
+            "SELECT * FROM paper_author_affiliation 
+            WHERE paperid='$paperID' 
+            ORDER BY authorsequence ASC;"
+        );
+        
+    }
+    public function get_paper_result($paperTitle=NULL,$begin=0,$num=10)
+    {
+        $queryForPaper=$this->db->query(
+            "SELECT papers.*, conferences.ConferenceName 
+             FROM papers,conferences
+             WHERE papers.title LIKE '$paperTitle' 
+                AND papers.conferenceid=conferences.conferenceid
+             ORDER BY papers.citations
+             LIMIT $begin,$num;"
+        );
+        $result=array();
+        foreach($queryForPaper->result_array() as $row){
+            $singlePaper["paperID"]=$row["PaperID"];
+            $singlePaper["title"]=$row["Title"];
+            $singlePaper["paperPublishYear"]=$row["PaperPublishYear"];
+            $singlePaper["conferenceID"]=$row["ConferenceID"];
+            $singlePaper["conferenceName"]=$row["ConferenceName"];
+            $singlePaper["authors"]=$this->get_authors_of_paper($row["PaperID"]);
+            array_push($result, $singlePaper);
+        }
+        return $result;
     }
 }
 ?>
