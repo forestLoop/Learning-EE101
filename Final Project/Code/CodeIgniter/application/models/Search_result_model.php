@@ -114,6 +114,7 @@ class Search_result_model extends CI_Model{
             $singlePaper["paperPublishYear"]=$row["PaperPublishYear"];
             $singlePaper["conferenceID"]=$row["ConferenceID"];
             $singlePaper["conferenceName"]=ucwords($row["ConferenceName"]);
+            $singlePaper["citations"]=$row["Citations"];
             $singlePaper["authors"]=$this->get_authors_of_paper($row["PaperID"]);
             array_push($result, $singlePaper);
         }

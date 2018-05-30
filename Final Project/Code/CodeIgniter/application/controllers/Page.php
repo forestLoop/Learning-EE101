@@ -57,22 +57,27 @@ class Page extends CI_Controller{
             $queryString=str_replace("%20", " ", $query);
             $type=$this->input->get_post("type")??"1111";
             $data["title"]="Search result of ".ucwords($queryString);
+            $data["resultNum"]=0;
             if($type[0]){
                 $data["authorNum"]=$this->Search_result_model->get_author_number($queryString);
                 $data["authorResult"]=$this->Search_result_model->get_author_result($queryString);
+                $data["resultNum"]+=$data["authorNum"];
             }
             if($type[1]){
-                $data["paperNum"]=$this->Search_result_model->get_paper_numer($queryString);
+                $data["paperNum"]=$this->Search_result_model->get_paper_number($queryString);
                 $data["paperResult"]=$this->Search_result_model->get_paper_result($queryString);
+                $data["resultNum"]+=$data["paperNum"];
             }
             if($type[2]){
                 $data["conferenceNum"]=$this->Search_result_model->get_conference_number($queryString);
                 $data["conferenceResult"]=$this->Search_result_model->get_conference_result($queryString);
+                $data["resultNum"]+=$data["conferenceNum"];
             }
             if($type[3]){
                 $data["affiliationNum"]=$this->Search_result_model->get_affiliation_number($queryString);
                 $data["affiliationResult"]=
                     $this->Search_result_model->get_affiliation_result($queryString);
+                $data["resultNum"]+=$data["affiliationNum"];
             }
             $this->load->view("templates/header.php",$data);
             $this->load->view("templates/result.php",$data);

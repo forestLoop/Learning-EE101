@@ -198,16 +198,27 @@ td{
 
 
 /*Search Result*/
-#searchResult{
+.searchResult{
     font-size:25px;
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 10%;
 }
-#overallResult{
+
+.resultContainer{
+    background-color: #ecf0f1;
+    border-style: none;
+    border-color: #1abc9c;
+    border-width: 1px;
+    padding: 20px;
+    margin-bottom:40px;
+}
+
+.overallResult{
     color:gray;
 }
-#resultTable{
+
+.resultTable{
     font-size: 25px;
     width:100%;
     color:black;
