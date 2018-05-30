@@ -66,7 +66,7 @@ class Page extends CI_Controller{
                 $data["paperResult"]=$this->Search_result_model->get_paper_result($queryString);
             }
             if($type[2]){
-                $data["paperNum"]=$this->Search_result_model->get_conference_number($queryString);
+                $data["conferenceNum"]=$this->Search_result_model->get_conference_number($queryString);
                 $data["conferenceResult"]=$this->Search_result_model->get_conference_result($queryString);
             }
             if($type[3]){

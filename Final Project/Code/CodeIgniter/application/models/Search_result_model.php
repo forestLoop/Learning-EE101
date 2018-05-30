@@ -81,18 +81,28 @@ class Search_result_model extends CI_Model{
     public function get_authors_of_paper($paperID=NULL)
     {
         $queryForAuthorsOfPaper=$this->db->query(
-            "SELECT * FROM paper_author_affiliation 
-            WHERE paperid='$paperID' 
-            ORDER BY authorsequence ASC;"
+            "SELECT paper_author_affiliation.*, authors.AuthorName 
+            FROM paper_author_affiliation,authors 
+            WHERE paper_author_affiliation.authorid=authors.authorid 
+                    AND paper_author_affiliation.paperid='$paperID' 
+            ORDER BY paper_author_affiliation.authorsequence ASC;"
         );
-        
+        $authors=array();
+        foreach($queryForAuthorsOfPaper->result_array() as $row){
+            $singleAuthor["authorSequence"]=$row["AuthorSequence"];
+            $singleAuthor["authorName"]=ucwords($row["AuthorName"]);
+            $singleAuthor["authorID"]=$row["AuthorID"];
+            array_push($authors, $singleAuthor);
+        }
+        return $authors;
     }
+
     public function get_paper_result($paperTitle=NULL,$begin=0,$num=10)
     {
         $queryForPaper=$this->db->query(
             "SELECT papers.*, conferences.ConferenceName 
              FROM papers,conferences
-             WHERE papers.title LIKE '$paperTitle' 
+             WHERE papers.title LIKE '%$paperTitle%' 
                 AND papers.conferenceid=conferences.conferenceid
              ORDER BY papers.citations
              LIMIT $begin,$num;"
@@ -100,12 +110,71 @@ class Search_result_model extends CI_Model{
         $result=array();
         foreach($queryForPaper->result_array() as $row){
             $singlePaper["paperID"]=$row["PaperID"];
-            $singlePaper["title"]=$row["Title"];
+            $singlePaper["title"]=ucwords($row["Title"]);
             $singlePaper["paperPublishYear"]=$row["PaperPublishYear"];
             $singlePaper["conferenceID"]=$row["ConferenceID"];
-            $singlePaper["conferenceName"]=$row["ConferenceName"];
+            $singlePaper["conferenceName"]=ucwords($row["ConferenceName"]);
             $singlePaper["authors"]=$this->get_authors_of_paper($row["PaperID"]);
             array_push($result, $singlePaper);
+        }
+        return $result;
+    }
+
+    public function get_conference_number($conferenceName=NULL)
+    {
+        $queryForConferenceNumber=$this->db->query("SELECT count(*) AS num FROM conferences WHERE conferencename LIKE '%$conferenceName%';
+        ");
+        $result=$queryForConferenceNumber->result_array();
+        return $result[0]["num"];
+    }
+
+    public function get_conference_result($conferenceName=NULL,$begin=0,$num=10)
+    {
+        $queryForConference=$this->db->query("
+            SELECT *  FROM conferences 
+            WHERE conferencename LIKE '%$conferenceName%' 
+            ORDER BY influence DESC 
+            LIMIT $begin,$num;"
+        );
+        $result=array();
+        foreach($queryForConference->result_array() as $row){
+            $singleConference["conferenceID"]=$row["ConferenceID"];
+            $singleConference["conferenceName"]=ucwords($row["ConferenceName"]);
+            $singleConference["paperNum"]=$row["PaperNum"];
+            $singleConference["authorNum"]=$row["AuthorNum"];
+            $singleConference["influence"]=$row["Influence"];
+            array_push($result, $singleConference);
+        }
+        return $result;
+    }
+
+
+    public function get_affiliation_number($affiliationName=NULL)
+    {
+        $queryForAffiliationNumber=$this->db->query(
+            "SELECT count(*) AS num FROM affiliations 
+            WHERE affiliationname LIKE '%$affiliationName%';"
+        );
+        $result=$queryForAffiliationNumber->result_array();
+        return $result[0]["num"];
+    }
+
+    public function get_affiliation_result($affiliationName=NULL,$begin=0,$num=10)
+    {
+        $queryForAffiliation=$this->db->query(
+            "SELECT * FROM affiliations 
+            WHERE affiliationname LIKE '%$affiliationName%' 
+            ORDER BY influence DESC
+            LIMIT $begin,$num;"
+        );
+        $result=array();
+        foreach($queryForAffiliation->result_array() as $row){
+            $singleAffiliation["affiliationID"]=$row["AffiliationID"];
+            $singleAffiliation["affiliationName"]=ucwords($row["AffiliationName"]);
+            $singleAffiliation["paperNum"]=$row["PaperNum"];
+            $singleAffiliation["authorNum"]=$row["AuthorNum"];
+            $singleAffiliation["influence"]=$row["Influence"];
+            array_push($result, $singleAffiliation);
         }
         return $result;
     }
