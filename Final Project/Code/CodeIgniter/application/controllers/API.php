@@ -16,15 +16,19 @@ class API extends CI_Controller{
 		$this->load->view('templates/footer.php');
 	}
 
-	public function search($query=NULL,$page=1,$pageSize=10)
+	public function search($type=NULL,$query=NULL,$page=1,$pageSize=10)
 	{
 		$json=array();
 		$data=array();
-		if(!$query){
+		if(!$query or !$type){
 			$json["success"]=0;
-			$json["reason"]="The query is NULL.";
+			$json["reason"]="The query or type is NULL.";
+		}else if(in_array($type, array("author","paper","conference","affiliation"))==false){
+			$json["success"]=0;
+			$json["reason"]="Invalid search type!";
 		}else{
-			$resultNum=$this->Search_result_model->get_result_number($query);
+			$get_result_number="get_".$type."_number";	//I love this feature of PHP!
+			$resultNum=$this->Search_result_model->$get_result_number($query);
 			if($resultNum==0){
 				$json["success"]=0;
 				$json["reason"]="No result found.";
@@ -45,8 +49,9 @@ class API extends CI_Controller{
 					$json["maxPage"]=$maxPage;
 					$json["page"]=$page;
 					$begin=$pageSize*($page-1);
+					$get_search_result="get_".$type."_result";	//Again, loving it!
 					$json["searchResult"] = 
-						$this->Search_result_model->get_search_result($query,$begin,$pageSize);
+						$this->Search_result_model->$get_search_result($query,$begin,$pageSize);
 					$json["itemNum"]=count($json["searchResult"]);
 				}
 			}

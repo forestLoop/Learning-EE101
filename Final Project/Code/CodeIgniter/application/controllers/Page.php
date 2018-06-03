@@ -55,29 +55,73 @@ class Page extends CI_Controller{
             $this->load->view("templates/footer.php");
         }else{
             $queryString=str_replace("%20", " ", $query);
-            $type=$this->input->get_post("type")??"1111";
+            $type=$this->input->get_post("type");
+            if(strlen($type)!=4 or $type=="0000")
+                $type="1111";
             $data["title"]="Search result of ".ucwords($queryString);
             $data["resultNum"]=0;
+            $data["script"]="
+            var query=\"$query\";";
             if($type[0]){
                 $data["authorNum"]=$this->Search_result_model->get_author_number($queryString);
                 $data["authorResult"]=$this->Search_result_model->get_author_result($queryString);
                 $data["resultNum"]+=$data["authorNum"];
+                $pageSize=10;
+                $maxPage=(int)(($data["authorNum"]-1)/$pageSize)+1;
+                $data["authorMaxPage"]=$maxPage;
+                $data["script"].="
+                var authorCurrentPage=1;
+                var authorPageSize=$pageSize;
+                var authorMaxPage=$maxPage;
+                var authorApiUrl=\"/api/search/author\";
+                $(function(){checkButtonStatus('author');})
+                ";
             }
             if($type[1]){
                 $data["paperNum"]=$this->Search_result_model->get_paper_number($queryString);
                 $data["paperResult"]=$this->Search_result_model->get_paper_result($queryString);
                 $data["resultNum"]+=$data["paperNum"];
+                $pageSize=10;
+                $maxPage=(int)(($data["paperNum"]-1)/$pageSize)+1;
+                $data["paperMaxPage"]=$maxPage;
+                $data["script"].="
+                var paperCurrentPage=1;
+                var paperPageSize=$pageSize;
+                var paperMaxPage=$maxPage;
+                var paperApiUrl=\"/api/search/paper\";
+                $(function(){checkButtonStatus('paper');})
+                ";
             }
             if($type[2]){
                 $data["conferenceNum"]=$this->Search_result_model->get_conference_number($queryString);
                 $data["conferenceResult"]=$this->Search_result_model->get_conference_result($queryString);
                 $data["resultNum"]+=$data["conferenceNum"];
+                $pageSize=10;
+                $maxPage=(int)(($data["conferenceNum"]-1)/$pageSize)+1;
+                $data["conferenceMaxPage"]=$maxPage;
+                $data["script"].="
+                var conferenceCurrentPage=1;
+                var conferencePageSize=$pageSize;
+                var conferenceMaxPage=$maxPage;
+                var conferenceApiUrl=\"/api/search/conference\";
+                $(function(){checkButtonStatus('conference');})
+                ";
             }
             if($type[3]){
                 $data["affiliationNum"]=$this->Search_result_model->get_affiliation_number($queryString);
                 $data["affiliationResult"]=
                     $this->Search_result_model->get_affiliation_result($queryString);
                 $data["resultNum"]+=$data["affiliationNum"];
+                $pageSize=10;
+                $maxPage=(int)(($data["affiliationNum"]-1)/$pageSize)+1;
+                $data["affiliationMaxPage"]=$maxPage;
+                $data["script"].="
+                var affiliationCurrentPage=1;
+                var affiliationPageSize=$pageSize;
+                var affiliationMaxPage=$maxPage;
+                var affiliationApiUrl=\"/api/search/affiliation\";
+                $(function(){checkButtonStatus('affiliation');})
+                ";
             }
             $this->load->view("templates/header.php",$data);
             $this->load->view("templates/result.php",$data);

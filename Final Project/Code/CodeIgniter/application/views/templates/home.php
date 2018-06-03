@@ -29,7 +29,7 @@
                         <input id="author" class="input-radio" type="checkbox" name="type[]" value="author" checked>Author
                     </label>
                     <label for="paper">
-                        <input id="paper" class="input-radio" type="checkbox" name="type[]" value="paper">Paper
+                        <input id="paper" class="input-radio" type="checkbox" name="type[]" value="paper" checked>Paper
                     </label>
                     <label for="conference">
                         <input id="conference" class="input-radio" type="checkbox" name="type[]" value="conference">Conference

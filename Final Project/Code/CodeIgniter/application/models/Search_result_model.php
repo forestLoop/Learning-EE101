@@ -26,7 +26,7 @@ class Search_result_model extends CI_Model{
         $queryForResultNumber=$this->db->query(
             "SELECT count(*) AS num FROM authors WHERE authorname LIKE '%$authorname%'");
         $result=$queryForResultNumber->result_array();
-        return $result[0]["num"];
+        return (int)$result[0]["num"];
     }
 
 
@@ -75,7 +75,7 @@ class Search_result_model extends CI_Model{
         $queryForPaperNumber=$this->db->query(
             "SELECT count(*) AS num FROM papers WHERE title LIKE '%$paperTitle%';");
         $result=$queryForPaperNumber->result_array();
-        return $result[0]["num"];
+        return (int)$result[0]["num"];
     }
 
     public function get_authors_of_paper($paperID=NULL)
@@ -104,7 +104,7 @@ class Search_result_model extends CI_Model{
              FROM papers,conferences
              WHERE papers.title LIKE '%$paperTitle%' 
                 AND papers.conferenceid=conferences.conferenceid
-             ORDER BY papers.citations
+             ORDER BY papers.citations DESC
              LIMIT $begin,$num;"
         );
         $result=array();
@@ -126,7 +126,7 @@ class Search_result_model extends CI_Model{
         $queryForConferenceNumber=$this->db->query("SELECT count(*) AS num FROM conferences WHERE conferencename LIKE '%$conferenceName%';
         ");
         $result=$queryForConferenceNumber->result_array();
-        return $result[0]["num"];
+        return (int)$result[0]["num"];
     }
 
     public function get_conference_result($conferenceName=NULL,$begin=0,$num=10)
@@ -157,7 +157,7 @@ class Search_result_model extends CI_Model{
             WHERE affiliationname LIKE '%$affiliationName%';"
         );
         $result=$queryForAffiliationNumber->result_array();
-        return $result[0]["num"];
+        return (int)$result[0]["num"];
     }
 
     public function get_affiliation_result($affiliationName=NULL,$begin=0,$num=10)

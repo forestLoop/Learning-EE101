@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title; ?></title>
-    <link rel="stylesheet" href="/static/js/jquery-ui.min.css"></script>
+    <link rel="stylesheet" href="/static/js/jquery-ui.css">
     <link rel="stylesheet" href="/static/css/main.css">
 <!--
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -17,13 +17,13 @@
     <script src="https://cdn.bootcss.com/d3/4.13.0/d3.min.js"></script>
     <script src="/static/js/main.js"></script>
     <?php 
-    if(isset($extra)){
+    if(isset($extra) and $extra){
         echo $extra;
     }
-    if(isset($script)){
-    	echo "<script>";
+    if(isset($script) and $script){
+    	echo "\n<script>\n";
     	echo $script;
-    	echo "</script>\n";
+    	echo "\n   </script>\n";
     }
     ?>
 </head>
