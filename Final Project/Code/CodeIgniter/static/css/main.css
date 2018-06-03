@@ -243,6 +243,55 @@ td{
     padding:0;
 }
 
+.paperTitle{
+    width:40%;
+}
+.paperPublishYear{
+    width: 15%;
+    text-align: center;
+}
+.paperConference{
+    width:15%;
+    text-align: center;
+}
+.paperCitations{
+    width:15%;
+    text-align: center;
+}
+.paperAuthors{
+    width:15%;
+}
+.paperAuthors ol{
+    padding-left: 25px;
+}
+
+.conferenceName,.conferencePaperNum,.conferenceAuthorNum,.conferenceInfluence{
+    width: 25%;
+    text-align: center;
+}
+
+td.conferenceName,td.conferencePaperNum,td.conferenceAuthorNum,td.conferenceInfluence{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+.conferenceName{
+    text-align: left;
+}
+
+.affiliationPaperNum,.affiliationAuthorNum,.affiliationInfluence{
+    width:20%;
+    text-align: center;
+}
+.affiliationName{
+    width:40%;
+}
+td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliationInfluence{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+
+
 #noResult{
     font-size:30px;
     color: gray;

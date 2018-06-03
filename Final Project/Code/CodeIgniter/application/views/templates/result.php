@@ -68,19 +68,19 @@
 		<?php if($paperNum!=0) :?>
 	    <table class="resultTable" id="paperResultTable">
 	    	<tr>
-	    		<th>Paper Title</th>
-	    		<th>Publish Year</th>
-	    		<th>Conference</th>
-	    		<th>Citations</th>
-	    		<th>Author(s)</th>
+	    		<th class="paperTitle">Paper Title</th>
+	    		<th class="paperPublishYear">Publish Year</th>
+	    		<th class="paperConference">Conference</th>
+	    		<th class="paperCitations">Citations</th>
+	    		<th class="paperAuthors">Author(s)</th>
 	    	</tr>
 			<?php foreach($paperResult as $singlePaper):?>
 			<tr class="dataRow">
-				<td><a href="/paper/<?=$singlePaper['paperID']?>"><?=$singlePaper["title"]?></a></td>
-				<td><?=$singlePaper["paperPublishYear"]?></td>
-				<td><a href="/conference/<?=$singlePaper['conferenceID']?>"><?=$singlePaper["conferenceName"]?></a></td>
-				<td><?=$singlePaper["citations"]?></td>
-				<td>
+				<td class="paperTitle"><a href="/paper/<?=$singlePaper['paperID']?>"><?=$singlePaper["title"]?></a></td>
+				<td class="paperPublishYear"><?=$singlePaper["paperPublishYear"]?></td>
+				<td class="paperConference"><a href="/conference/<?=$singlePaper['conferenceID']?>"><?=$singlePaper["conferenceName"]?></a></td>
+				<td class="paperCitations"><?=$singlePaper["citations"]?></td>
+				<td class="paperAuthors">
 					<ol>
 							<?php foreach($singlePaper["authors"] as $author):?>
 							<li>
@@ -112,21 +112,21 @@
 		<?php if($conferenceNum!=0):?>
 		<table class="resultTable" id="conferenceResultTable">
 			<tr>
-				<th>Conference Name</th>
-				<th>Papers</th>
-				<th>Authors</th>
-				<th>Influence</th>
+				<th class="conferenceName">Conference Name</th>
+				<th class="conferencePaperNum">Papers</th>
+				<th class="conferenceAuthorNum">Authors</th>
+				<th class="conferenceInfluence">Influence</th>
 			</tr>
 			<?php foreach($conferenceResult as $singleConference) :?>
 			<tr class="dataRow">
-				<td>
+				<td class="conferenceName">
 					<a href="/conference/<?=$singleConference['conferenceID']?>">
 						<?=$singleConference["conferenceName"]?>
 					</a>
 				</td>
-				<td><?=$singleConference["paperNum"]?></td>
-				<td><?=$singleConference["authorNum"]?></td>
-				<td><?=$singleConference["influence"]?></td>
+				<td class="conferencePaperNum"><?=$singleConference["paperNum"]?></td>
+				<td class="conferenceAuthorNum"><?=$singleConference["authorNum"]?></td>
+				<td class="conferenceInfluence"><?=$singleConference["influence"]?></td>
 			</tr>
 			<?php endforeach;?>
 		</table>
@@ -148,21 +148,21 @@
 		<?php if($affiliationNum!=0):?>
 		<table class="resultTable" id="affiliationResultTable">
 			<tr>
-				<th>Affiliation Name</th>
-				<th>Papers</th>
-				<th>Authors</th>
-				<th>Influence</th>
+				<th class="affiliationName">Affiliation Name</th>
+				<th class="affiliationPaperNum">Papers</th>
+				<th class="affiliationAuthorNum">Authors</th>
+				<th class="affiliationInfluence">Influence</th>
 			</tr>
 			<?php foreach($affiliationResult as $singleAffiliation) :?>
 			<tr class="dataRow">
-				<td>
+				<td class="affiliationName">
 					<a href="/affiliation/<?=$singleAffiliation['affiliationID']?>">
 						<?=$singleAffiliation["affiliationName"]?>
 					</a>
 				</td>
-				<td><?=$singleAffiliation["paperNum"]?></td>
-				<td><?=$singleAffiliation["authorNum"]?></td>
-				<td><?=$singleAffiliation["influence"]?></td>
+				<td class="affiliationPaperNum"><?=$singleAffiliation["paperNum"]?></td>
+				<td class="affiliationAuthorNum"><?=$singleAffiliation["authorNum"]?></td>
+				<td class="affiliationInfluence"><?=$singleAffiliation["influence"]?></td>
 			</tr>
 			<?php endforeach;?>
 		</table>
