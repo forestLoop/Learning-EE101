@@ -206,10 +206,10 @@ td{
 }
 
 .resultContainer{
-    background-color: #ecf0f1;
+    background-color: #f5f6fa;
     border-style: none;
     border-color: #1abc9c;
-    border-width: 1px;
+    border-width: 0.5px;
     padding: 20px;
     margin-bottom:40px;
 }
@@ -252,13 +252,13 @@ td{
     transform: translate(-50%,0);
 }
 
-#pagination{
+.pagination{
     margin-top: 20px;
     height: 50px;
     text-align: center;
 }
 
-#pageInfo{
+.pageInfo{
     color:gray;
     height:inherit;
     font-size: 25px;
@@ -266,15 +266,15 @@ td{
     vertical-align: middle;
 }
 
-#currentPage{
+.currentPage{
     color:#1abc9c;
     font-size: 30px;
 }
-#resultNext{
+.resultNext{
     margin-top: 0;
     float: right;
 }
-#resultPrev{
+.resultPrev{
     margin-top: 0;
     float:left;
 }
