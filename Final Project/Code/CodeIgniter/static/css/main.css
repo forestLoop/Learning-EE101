@@ -57,7 +57,7 @@ button{
     border-width: 1px;
     color: #1abc9c;
     font-size: 25px;
-    font-weight: 100;
+    font-family: inherit;
     height:50px;
     width:15%;
     border-radius: 5px;
@@ -211,11 +211,36 @@ td{
     border-color: #1abc9c;
     border-width: 0.5px;
     padding: 20px;
-    margin-bottom:40px;
+    margin-bottom:60px;
 }
 
-.overallResult{
+.titleOfContainer{
+    width: 100%;
+    height:40px;
+    background-color: #1abc9c;
+    padding-top: 5px;
+}
+
+.titleOfContainer a{
+    margin-left: 20px;
+    color:white;
+    
+}
+
+.overallResult p{
+    margin-top: 0;
     color:gray;
+}
+
+.overallResult ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.overallResult ul li{
+    color: gray;
+    display: inline;
+    margin-right: 10px;
 }
 
 .resultTable{

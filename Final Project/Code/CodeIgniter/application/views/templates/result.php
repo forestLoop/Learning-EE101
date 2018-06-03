@@ -9,15 +9,32 @@
 		}
 		echo "$number $noun $verb";
 	}
+
 ?>
 
 
 <div class="searchResult">
 	<div class="overallResult">
 		<p><?print_in_correct_form($resultNum,"result")?> found.</p>
+		<ul>
+			<li>Quick Jump:</li>
+		<?php
+		if(isset($authorNum))
+			echo '<li><a href="#authorResult">Author</a></li>';
+		if(isset($paperNum))
+			echo '<li><a href="#paperResult">Paper</a></li>';
+		if(isset($conferenceNum))
+			echo '<li><a href="#conferenceResult">Conference</a></li>';
+		if(isset($affiliationNum))
+			echo '<li><a href="#affiliationResult">Affiliation</a></li>';
+		?>
+		</ul>
 	</div>
 
 <?php if(isset($authorNum)):?>
+	<div class="titleOfContainer">
+		<a href="#authorResult" name="authorResult">Author(s)</a>
+	</div>
 	<div class="resultContainer">
 	    <div class="overallResult">
 	    	<p><?print_in_correct_form($authorNum,"author")?> found.</p>
@@ -61,6 +78,9 @@
 
 
 <?php if(isset($paperNum)):?>
+	<div class="titleOfContainer">
+		<a href="#paperResult" name="paperResult">Paper(s)</a>
+	</div>
 	<div class="resultContainer">
 	    <div class="overallResult">
 	    	<p><?print_in_correct_form($paperNum,"paper")?> found.</p>
@@ -105,6 +125,9 @@
 <?php endif;?>
 
 <?php if(isset($conferenceNum)):?>
+	<div class="titleOfContainer">
+		<a href="#conferenceResult" name="conferenceResult">Conference(s)</a>
+	</div>
 	<div class="resultContainer">
 		<div class="overallResult">
 			<p><?print_in_correct_form($conferenceNum,"conference")?> found.</p>
@@ -141,6 +164,9 @@
 <?php endif;?>
 
 <?php if(isset($affiliationNum)):?>
+	<div class="titleOfContainer">
+		<a href="#affiliationResult" name="affiliationResult">Affiliation(s)</a>
+	</div>
 	<div class="resultContainer">
 		<div class="overallResult">
 			<p><?print_in_correct_form($affiliationNum,"affiliation")?> found.</p>
