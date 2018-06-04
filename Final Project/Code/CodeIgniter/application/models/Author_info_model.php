@@ -97,19 +97,10 @@ class Author_info_model extends CI_Model{
             );
         return $queryForUncitedPaper->result_array();
     }
-    public function get_author_info($authorID=NULL,$begin=0,$num=10,$paperNum=NULL)
+
+    public function get_papers($authorID=NULL,$begin=0,$num=10,$paperNum=NULL)
     {
-        if($authorID==NULL)
-            return NULL;
         $paperNum= $paperNum ?? $this->get_paper_number($authorID);
-        $result=array();
-        $queryForName=$this->db->query("SELECT AuthorName From authors where AuthorID=\"$authorID\"");
-        $result["authorName"]=($queryForName->row_array())["AuthorName"];
-        if(!$result["authorName"]){
-            return NULL;
-        }
-        $result["authorDescription"]="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-        $result["authorImg"]="/static/img/author.jpg";
         $papers=array();
         if($begin>=0 and $begin+$num<=$paperNum["cited"]){
             foreach ($this->get_cited_papers($authorID,$begin,$num) as $row) {
@@ -133,7 +124,21 @@ class Author_info_model extends CI_Model{
                 array_push($papers, $this->handle_one_paper($row));
             }
         }
-        $result["papers"]=$papers;
+        return $papers;
+    }
+    public function get_author_info($authorID=NULL,$begin=0,$num=10,$paperNum=NULL)
+    {
+        if($authorID==NULL)
+            return NULL;
+        $result=array();
+        $queryForName=$this->db->query("SELECT AuthorName From authors where AuthorID=\"$authorID\"");
+        $result["authorName"]=($queryForName->row_array())["AuthorName"];
+        if(!$result["authorName"]){
+            return NULL;
+        }
+        $result["authorDescription"]="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+        $result["authorImg"]="/static/img/author.jpg";
+        $result["papers"]=$this->get_papers($authorID,$begin,$num,$paperNum);
         return $result;
     }
 

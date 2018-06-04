@@ -3,15 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title; ?></title>
-    <link rel="stylesheet" href="/static/js/jquery-ui.css">
+    <link rel="stylesheet" href="/static/css/jquery-ui.css">
     <link rel="stylesheet" href="/static/css/main.css">
-<!--
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script>
--->
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.bootcss.com/d3/4.13.0/d3.min.js"></script>

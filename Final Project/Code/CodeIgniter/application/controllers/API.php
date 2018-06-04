@@ -60,13 +60,16 @@ class API extends CI_Controller{
 		$this->load->view("templates/json.php",$data);
 	}
 
-	public function papers($ID=NULL,$page=1,$pageSize=10)
+	public function get_papers($type=NULL,$ID=NULL,$page=1,$pageSize=10)
 	{
 		$json=array();
 		$data=array();
-		if(!$ID){
+		if(!$ID or !$type){
 			$json["success"]=0;
 			$json["reason"]="Please specify the ID.";
+		}else if(!in_array($type, array("author","conference","affiliation"))){
+			$json["success"]=0;
+			$json["reason"]="Invalid type!";
 		}else{
 			$paperNum=$this->Author_info_model->get_paper_number($ID);
 			if($paperNum["all"]==0){
@@ -88,7 +91,7 @@ class API extends CI_Controller{
 					$json["maxPage"]=$maxPage;
 					$json["page"]=$page;
 					$begin=$pageSize*($page-1);
-					$json["papers"]=$this->Author_info_model->get_author_info($ID,$begin,$pageSize,$paperNum)["papers"];
+					$json["papers"]=$this->Author_info_model->get_papers($ID,$begin,$pageSize,$paperNum);
 					$json["itemNum"]=count($json["papers"]);
 				}
 			}
