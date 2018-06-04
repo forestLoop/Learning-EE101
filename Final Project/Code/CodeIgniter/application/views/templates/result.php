@@ -13,7 +13,7 @@
 ?>
 
 
-<div class="searchResult">
+<div class="mainContainer">
 	<div class="overallResult">
 		<p><?print_in_correct_form($resultNum,"result")?> found.</p>
 		<ul>

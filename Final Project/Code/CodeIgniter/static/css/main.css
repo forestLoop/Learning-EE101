@@ -198,7 +198,7 @@ td{
 
 
 /*Search Result*/
-.searchResult{
+.mainContainer{
     font-size:25px;
     margin-left: 10%;
     margin-right: 10%;
@@ -496,4 +496,17 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
 
 .input-radio:checked:before {
     background-color: #1abc9c;
+}
+
+
+/*New author page*/
+.leftContainer{
+    width:30%;
+    float:left;
+    border-right: solid 1px;
+}
+
+.rightContainer{
+    width:70%;
+    float: left;
 }
