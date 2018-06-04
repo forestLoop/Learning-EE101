@@ -356,76 +356,49 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
 
 
 /*Author Page*/
-#authorPage{
-    font-size:25px;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 10%;
+.leftContainer{
+    width:25%;
+    float:left;
 }
 
-
-#authorProfile{
-    text-indent:3%;
-    height:200px;
+.rightContainer{
+    width:75%;
+    float:left;
 }
 
 #authorPhoto{
-    height: 200px;
-    width:200px;
-    float: left;
+    margin-left: 10%;
+    width:80%;
+    height:width;
+    margin-bottom: 20px;
 }
 
 #authorDescription{
-    margin-left: 225px;
-    height:inherit;
+    margin-left: 10%;
+    width:80%;
     overflow: auto;
+    background-color: #f5f6fa;
+    text-indent: 10%;
 }
 
-#papersTable{
-    text-align: left;
-    border-collapse: collapse;
-    width:100%;
-}
-
-.PaperTitle{
+.authorPaperTitle{
     width:40%;
 }
 
-.PublishYear{
-    width:10%;
+.authorPaperPublishYear, .authorPaperConference, .authorPaperCitations{
+    width:12%;
     text-align: center;
 }
 
-.Conference{
-    width:10%;
-    text-align: center;
+.authorPaperAuthors{
+    width:25%;
 }
 
-.Citations{
-    width:10%;
-    text-align: center;
-}
-
-.Authors{
-    width:30%;
-}
-
-.Authors ol{
+.authorPaperAuthors ol{
     padding-left: 25px;
 }
 
-#papersPrev{
-    float: left;
-    margin-top: 0;
-}
-
-#papersNext{
-    float: right;
-    margin-top: 0;
-}
-
 #graph{
-    margin-top:10px;
     width:100%;
 }
 
@@ -499,14 +472,3 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
 }
 
 
-/*New author page*/
-.leftContainer{
-    width:30%;
-    float:left;
-    border-right: solid 1px;
-}
-
-.rightContainer{
-    width:70%;
-    float: left;
-}
