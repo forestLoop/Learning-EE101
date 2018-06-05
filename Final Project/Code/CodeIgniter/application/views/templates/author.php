@@ -19,14 +19,32 @@
 			<a href="#relatedAffiliations" name="relatedAffiliations">Affiliation(s)</a>
 		</div>
 		<div id="authorRelatedAffiliations">
-			<!--  -->
+			<ul>
+			<?foreach($relatedAffiliations as $affiliation):?>
+			<li>
+			<a href="/affiliation/<?=$affiliation["affiliationID"]?>">
+				<?=ucwords($affiliation["affiliationName"])?>
+			</a>
+			<span class="times">[<?=$affiliation["num"]?>]</span>
+			</li>
+			<?endforeach;?>
+			</ul>
 		</div>
 
 		<div class="titleOfContainer">
 			<a href="#relatedConferences" name="relatedConferences">Conference(s)</a>
 		</div>
 		<div id="authorRelatedConferences">
-			<!--  -->
+			<ul>
+			<?foreach($relatedConferences as $conference):?>
+			<li>
+			<a href="/conference/<?=$conference["conferenceID"]?>">
+				<?=ucwords($conference["conferenceName"])?>
+			</a>
+			<span class="times">[<?=$conference["num"]?>]</span>
+			</li>
+			<?endforeach;?>
+			</ul>
 		</div>
 
 		<div class="titleOfContainer">
@@ -40,7 +58,16 @@
 			<a href="#relatedAuthors" name="relatedAuthors">Author(s)</a>
 		</div>
 		<div id="authorRelatedAuthors">
-			<!--  -->
+			<ul>
+			<?foreach($relatedAuthors as $author):?>
+			<li>
+			<a href="/author/<?=$author["authorID"]?>">
+				<?=$author["authorName"]?>
+			</a>
+			<span class="times">[<?=$author["cooperationTimes"]?>]</span>
+			</li>
+			<?endforeach;?>
+			</ul>
 		</div>
 		
 	</div>
@@ -96,6 +123,16 @@
         			<button type="button" id="authorPageResultNext" class="resultNext">Next</button>
     			</div>
     		</div>
+    	</div>
+    	<div id="relationGraph">
+    		<div class="titleOfContainer">
+    			<a href="#relationGraph" name="relationGraph">
+    				Relation Graph
+    			</a>
+    		</div>
+    		<svg id="forceGraph" width="800" height="600">
+    			<script src="/static/js/relation-graph.js"></script>
+    		</svg>
     	</div>
 	</div>
 </div>

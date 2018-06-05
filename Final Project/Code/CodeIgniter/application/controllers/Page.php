@@ -167,6 +167,9 @@ class Page extends CI_Controller{
         }else{
             $data["author_info"]=$this->Author_info_model->get_author_info($authorID);
             $data["paperNum"]=$this->Author_info_model->get_paper_number($authorID)["all"];
+            $data["relatedAuthors"]=$this->Author_info_model->get_most_related_authors($authorID);
+            $data["relatedAffiliations"]=$this->Author_info_model->get_related_affiliations($authorID);
+            $data["relatedConferences"]=$this->Author_info_model->get_related_conferences($authorID);
             $data["currentPage"]=1;
             $pageSize=10;
             $maxPage=(int)(($data["paperNum"]-1)/$pageSize)+1;

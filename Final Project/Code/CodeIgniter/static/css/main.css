@@ -380,9 +380,26 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
     overflow: auto;
     background-color: #f5f6fa;
     text-indent: 10%;
-    padding-top: 20px;
+    padding: 20px;
     word-break: break-all;
     max-height: 500px;
+    margin-bottom: 20px;
+}
+
+#authorRelatedAuthors,#authorRelatedConferences,#authorRelatedAffiliations{
+    padding:20px;
+    background-color: #f5f6fa;
+    margin-bottom: 20px;
+}
+
+#authorRelatedAuthors ul,#authorRelatedConferences ul,#authorRelatedAffiliations ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.times{
+    color:gray;
 }
 
 .authorPaperTitle{
@@ -402,15 +419,12 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
     padding-left: 25px;
 }
 
-#graph{
-    width:100%;
-}
 
 #forceGraph{
-    width:45%;
-    height:45%;
-    border:solid;
-    border-color: #1abc9c;
+    width:100%;
+    height:width;
+    background-color: #f5f6fa;
+    margin-bottom: 60px;
 }
 
 

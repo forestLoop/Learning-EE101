@@ -17,19 +17,6 @@ function color(d)
 {
   return ['#25c6fc','#e03636','#edd0be','#5d9431'][d]
 }
-var target = document.getElementById('graph');
-var opts = {
-  lines: 9, // The number of lines to draw
-  length: 9, // The length of each line
-  width: 5, // The line thickness
-  radius: 14, // The radius of the inner circle
-  color: '#007fff', // #rgb or #rrggbb or array of colors
-  speed: 1.9, // Rounds per second
-  trail: 40, // Afterglow percentage
-  className: 'spinner', // The CSS class to assign to the spinner
-};
-//var spinner = new Spinner(opts);
-//spinner.spin(target);
 
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
@@ -37,7 +24,7 @@ var simulation = d3.forceSimulation()
     .force("center", d3.forceCenter(width / 2, height / 2));
 
 var type=1;
-var jsonSource=["/api/graph",query,type].join("/");
+var jsonSource=["/api/graph",authorID,type].join("/");
 console.log(jsonSource);
 
 d3.json(jsonSource, function(error, graph) {
