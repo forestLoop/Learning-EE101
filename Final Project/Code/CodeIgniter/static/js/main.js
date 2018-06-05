@@ -87,10 +87,38 @@ function fillAffiliationResultTable(data)
 
 }
 
+function fillAuthorPagePaperTable(data)
+{
+	$("#authorPapersTable").find(".dataRow").each(function(index){
+		if(index>=data["itemNum"]){
+			$(this).hide();
+		}else{
+			$(this).show();
+			var singlePaper=data["papers"][index];
+			$(this).children(".authorPaperTitle").children("a").attr("href","/paper/"+singlePaper["paperID"]);
+			$(this).children(".authorPaperTitle").children("a").text(singlePaper["paperTitle"]);
+			$(this).children(".authorPaperPublishYear").text(singlePaper["paperPublishYear"]);
+			$(this).children(".authorPaperConference").children("a").attr("href","/conference/"+singlePaper["conferenceID"]);
+			$(this).children(".authorPaperConference").children("a").text(singlePaper["conferenceName"]);
+			$(this).children(".authorPaperCitations").text(singlePaper["citation"]); //notice: in API, it has no 's'
+			$(this).children(".authorPaperAuthors").children("ol").empty();
+			var authors=singlePaper["authors"];
+			for(var i=0,len=authors.length;i!=len;i++){
+				var content='<a href="/author/'+authors[i]["subAuthorID"]+'">'+authors[i]["subAuthorName"]+'</a>';
+				$(this).children(".authorPaperAuthors").children("ol").append("<li>"+content+"</li>");
+			}
+		}
+	});
+	$("#authorPageCurrentPage").text(authorPageCurrentPage);
+}
+
+
 function checkButtonStatus(prefix)
 {
 	$("#"+prefix+"ResultPrev").attr("disabled",eval(prefix+"CurrentPage")<=1);
 	$("#"+prefix+"ResultNext").attr("disabled",eval(prefix+"CurrentPage")>=eval(prefix+"MaxPage"));
+	console.log(eval(prefix+"CurrentPage")<=1);
+	console.log(eval(prefix+"CurrentPage")>=eval(prefix+"MaxPage"));
 }
 
 $(function(){
@@ -148,6 +176,21 @@ $(function(){
 				affiliationCurrentPage=affiliationNextPage;
 				fillAffiliationResultTable(data);
 				checkButtonStatus("affiliation");
+			});
+		}
+})
+});
+
+$(function(){
+	$("#authorPageResultNext").click(function(){
+		if(authorPageCurrentPage<authorPageMaxPage){
+			var authorPageNextPage=authorPageCurrentPage+1;
+			var authorPageTargetUrl=[authorPageApiUrl,authorID,authorPageNextPage.toString(),authorPagePageSize.toString()].join('/');
+			console.log(authorPageTargetUrl);
+			$.getJSON(authorPageTargetUrl,function(data){
+				authorPageCurrentPage=authorPageNextPage;
+				fillAuthorPagePaperTable(data);
+				checkButtonStatus("authorPage");
 			});
 		}
 })
@@ -212,27 +255,17 @@ $(function(){
 });
 
 $(function(){
-	$("#papersPrev").click(function(){
-		if(currentPage>1){
-			var prevPage=currentPage-1;
-			var targetUrl=[apiUrl,query,prevPage.toString(),pageSize.toString()].join('/');
-			console.log(targetUrl);
-			$.getJSON(targetUrl,fillPapersTableWithJSON);
-			currentPage=prevPage;
+	$("#authorPageResultPrev").click(function(){
+		if(authorPageCurrentPage>1){
+			var authorPagePrevPage=authorPageCurrentPage-1;
+			var authorPageTargetUrl=[authorPageApiUrl,authorID,authorPagePrevPage.toString(),authorPagePageSize.toString()].join('/');
+			console.log(authorPageTargetUrl);
+			$.getJSON(authorPageTargetUrl,function(data){
+				authorPageCurrentPage=authorPagePrevPage;
+				fillAuthorPagePaperTable(data);
+				checkButtonStatus("authorPage");
+			});
 		}
-		checkButtonStatus("#papersPrev","#papersNext");
-	})
-})
-
-$(function(){
-	$("#papersNext").click(function(){
-		if(currentPage<maxPage){
-			var nextPage=currentPage+1;
-			var targetUrl=[apiUrl,query,nextPage.toString(),pageSize.toString()].join('/');
-			console.log(targetUrl);
-			$.getJSON(targetUrl,fillPapersTableWithJSON);
-			currentPage=nextPage;
-		}
-		checkButtonStatus("#papersPrev","#papersNext");
 })
 });
+

@@ -15,8 +15,32 @@
 <div class="mainContainer">
 	<div class="leftContainer">
 		<img id="authorPhoto" src="<?php echo $author_info['authorImg']; ?>">
+		<div class="titleOfContainer">
+			<a href="#relatedAffiliations" name="relatedAffiliations">Affiliation(s)</a>
+		</div>
+		<div id="authorRelatedAffiliations">
+			<!--  -->
+		</div>
+
+		<div class="titleOfContainer">
+			<a href="#relatedConferences" name="relatedConferences">Conference(s)</a>
+		</div>
+		<div id="authorRelatedConferences">
+			<!--  -->
+		</div>
+
+		<div class="titleOfContainer">
+			<a href="#description" name="description">Description</a>
+		</div>
 		<div id="authorDescription">
 			<?=$author_info["authorDescription"]?>
+		</div>
+
+		<div class="titleOfContainer">
+			<a href="#relatedAuthors" name="relatedAuthors">Author(s)</a>
+		</div>
+		<div id="authorRelatedAuthors">
+			<!--  -->
 		</div>
 		
 	</div>
@@ -67,9 +91,9 @@
 					<? endforeach;?>
 				</table>
     			<div class="pagination">
-        			<button type="button" id="papersPrev" class="resultPrev" disabled="disabled">Previous</button>
+        			<button type="button" id="authorPageResultPrev" class="resultPrev" disabled="disabled">Previous</button>
         			<span class="pageInfo">Page <span id="authorPageCurrentPage" class="currentPage"><?=$currentPage?></span> of <?=$maxPage?></span>
-        			<button type="button" id="papersNext" class="resultNext">Next</button>
+        			<button type="button" id="authorPageResultNext" class="resultNext">Next</button>
     			</div>
     		</div>
     	</div>

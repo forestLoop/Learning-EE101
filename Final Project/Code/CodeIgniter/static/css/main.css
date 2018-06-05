@@ -357,28 +357,32 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
 
 /*Author Page*/
 .leftContainer{
-    width:25%;
+    width:23%;
     float:left;
 }
 
 .rightContainer{
+    margin-left: 2%;
     width:75%;
     float:left;
 }
 
 #authorPhoto{
-    margin-left: 10%;
-    width:80%;
+    /*margin-left: 10%;*/
+    width:100%;
     height:width;
     margin-bottom: 20px;
 }
 
 #authorDescription{
-    margin-left: 10%;
-    width:80%;
+/*    margin-left: 10%;
+    width:80%;*/
     overflow: auto;
     background-color: #f5f6fa;
     text-indent: 10%;
+    padding-top: 20px;
+    word-break: break-all;
+    max-height: 500px;
 }
 
 .authorPaperTitle{
