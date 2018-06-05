@@ -168,18 +168,17 @@ class Page extends CI_Controller{
             $data["author_info"]=$this->Author_info_model->get_author_info($authorID);
             $data["paperNum"]=$this->Author_info_model->get_paper_number($authorID)["all"];
             $data["currentPage"]=1;
-            $maxPage=(int)(($data["paperNum"]-1)/10)+1;
+            $pageSize=10;
+            $maxPage=(int)(($data["paperNum"]-1)/$pageSize)+1;
             $data["maxPage"]=$maxPage;
             $data["script"]= "
-        currentPage=1;
-        maxPage=$maxPage;
-        pageSize=10;
-        query='$authorID';
-        apiUrl='/api/papers';
-        $(function(){
-            checkButtonStatus('#papersPrev','#papersNext');
-            });
-    ";
+                var authorID=\"$authorID\";
+                var authorPageCurrentPage=1;
+                var authorPagePageSize=$pageSize;
+                var authorPageMaxPage=$maxPage;
+                var authorPageApiUrl=\"/api/get_papers/author\";
+                $(function(){checkButtonStatus('authorPage');})
+            ";
             if($data["author_info"]==NULL){
                 $data["title"]="Error";
                 $data["errorMsg"]="Invalid Author ID!";
