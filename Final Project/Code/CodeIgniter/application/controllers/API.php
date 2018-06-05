@@ -100,14 +100,21 @@ class API extends CI_Controller{
 		$this->load->view("templates/json.php",$data);
 	}
 
-	public function graph($query=NULL,$type=1)
+	public function graph($type,$query)
 	{
+		if(!$type or !$query){
+			return;
+		}
 		$data=array();
 		$json=array();
-		if($query!=NULL){
-			$json=$this->Author_info_model->get_graph_data($query);
-			$data["json"]=$json;
-			$this->load->view("templates/json.php",$data);
+		switch($type){
+			case "author-relation":
+				$json=$this->Author_info_model->get_graph_data($query);
+				$data["json"]=$json;
+				$this->load->view("templates/json.php",$data);
+				break;
+			default:
+				break;
 		}
 	}
 

@@ -371,7 +371,7 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
     /*margin-left: 10%;*/
     width:100%;
     height:width;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 #authorDescription{
@@ -383,13 +383,13 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
     padding: 20px;
     word-break: break-all;
     max-height: 500px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 #authorRelatedAuthors,#authorRelatedConferences,#authorRelatedAffiliations{
     padding:20px;
     background-color: #f5f6fa;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 #authorRelatedAuthors ul,#authorRelatedConferences ul,#authorRelatedAffiliations ul{

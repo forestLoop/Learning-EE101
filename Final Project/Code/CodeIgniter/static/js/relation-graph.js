@@ -24,7 +24,8 @@ var simulation = d3.forceSimulation()
     .force("center", d3.forceCenter(width / 2, height / 2));
 
 var type=1;
-var jsonSource=["/api/graph",authorID,type].join("/");
+var api="/api/graph/author-relation";
+var jsonSource=[api,authorID,type].join("/");
 console.log(jsonSource);
 
 d3.json(jsonSource, function(error, graph) {
