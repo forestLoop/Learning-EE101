@@ -202,8 +202,26 @@ class Author_info_model extends CI_Model{
             return ucwords($row["AuthorName"]);
         else
             return NULL;
-
     }
+
+    public function get_most_related_authors($authorID=NULL,$num=10)
+    {
+        $relatedAuthors=$this->get_related_authors($authorID);
+        array_multisort(array_column($relatedAuthors, 1),SORT_DESC,$relatedAuthors);
+        if(count($relatedAuthors)>$num)
+            $relatedAuthors=array_slice($relatedAuthors, 0,$num);
+        $result=array();
+        foreach($relatedAuthors as $row){
+            $oneAuthor=array();
+            $oneAuthor["authorID"]=$row[0];
+            $oneAuthor["authorName"]=$this->get_author_name($row[0]);
+            $oneAuthor["cooperationTimes"]=$row[1];
+            $oneAuthor["relationship"]=$row[2];
+            array_push($result, $oneAuthor);
+        }
+        return $result;
+    }
+
     public function get_related_authors($authorID=NULL)
     {
         if($authorID==NULL)
@@ -266,6 +284,34 @@ class Author_info_model extends CI_Model{
         $result["nodes"]=$nodes;
         $result["links"]=$links;
         return $result;
+    }
+
+    public function get_related_affiliations($authorID,$num=10)
+    {
+        $queryForRelatedAffiliations=$this->db->query(
+            "SELECT paper_author_affiliation.affiliationID,affiliations.affiliationName,count(*) AS num 
+            FROM paper_author_affiliation,affiliations 
+            WHERE authorid='$authorID' AND paper_author_affiliation.affiliationid=affiliations.affiliationid
+            GROUP BY affiliationid 
+            ORDER BY count(*) DESC
+            LIMIT $num;"
+        );
+        return $queryForRelatedAffiliations->result_array();
+    }
+
+    public function get_related_conferences($authorID,$num=10)
+    {
+        $queryForRelatedConferences=$this->db->query(
+            "SELECT conferences.conferenceName, papers.conferenceID, count(*) AS num 
+            FROM conferences,papers,paper_author_affiliation 
+            WHERE conferences.conferenceid=papers.conferenceid 
+                AND paper_author_affiliation.authorid='$authorID' 
+                AND paper_author_affiliation.paperid=papers.paperid 
+            GROUP BY conferenceid 
+            ORDER BY num DESC 
+            LIMIT $num;"
+        );
+        return $queryForRelatedConferences->result_array();
     }
 }
 
