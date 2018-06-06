@@ -69,6 +69,21 @@
 			<?endforeach;?>
 			</ul>
 		</div>
+
+    	<div class="titleOfContainer">
+    		<a href="#tagCloud" name="tagCloud">
+    			Tag Cloud
+    		</a>
+    	</div>
+    	<div id="tagCloud">
+    		<script src="/static/js/jquery.svg3dtagcloud.js"></script>
+    		<script>
+    			$(function()
+				{
+					myTagCloud("#tagCloud","/api/graph/author-tagcloud/"+authorID);
+				})
+    		</script>
+    	</div>
 	</div>
 
 	<div class="rightContainer">

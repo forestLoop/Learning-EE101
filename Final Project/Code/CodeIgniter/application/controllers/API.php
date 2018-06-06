@@ -118,6 +118,10 @@ class API extends CI_Controller{
 				$data["json"]=$json;
 				$this->load->view("templates/json.php",$data);
 				break;
+			case "author-tagcloud":
+				$json=$this->Author_info_model->get_author_words($query,25);
+				$data["json"]=$json;
+				$this->load->view("templates/json.php",$data);
 			default:
 				break;
 		}

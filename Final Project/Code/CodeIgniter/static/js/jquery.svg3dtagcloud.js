@@ -639,9 +639,9 @@ function myTagCloud(containerID,API){
     $.getJSON(API,function(result){
         var settings={
             entries: result,
-            width: 480,
-            height: 480,
-            radius: '65%',
+            width: 350,
+            height: 350,
+            radius: '80%',
             radiusMin: 75,
             bgDraw: false,
             bgColor: 'white',
@@ -656,7 +656,7 @@ function myTagCloud(containerID,API){
             fontWeight: 'bold',
             fontStyle: 'normal',//italic 
             fontStretch: 'normal',//wider, narrower, ultra-condensed, extra-condensed, condensed, semi-condensed, semi-expanded, expanded, extra-expanded, ultra-expanded
-            fontToUpperCase: true,
+            fontToUpperCase: false,
             tooltipFontFamily: 'Oswald, Arial, sans-serif',
             tooltipFontSize: '11',
             tooltipFontColor: '#fff',

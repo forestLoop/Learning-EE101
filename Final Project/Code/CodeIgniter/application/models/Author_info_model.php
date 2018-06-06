@@ -330,6 +330,40 @@ class Author_info_model extends CI_Model{
         }
         return $result;
     }
+
+    public function get_author_words($authorID=NULL,$maxNum=10)
+    {
+        $queryForAllPaperTitles=$this->db->query(
+            "SELECT papers.title FROM papers,paper_author_affiliation 
+            WHERE papers.paperid=paper_author_affiliation.paperid 
+                AND paper_author_affiliation.authorid='$authorID';"
+        );
+        $allWords=array();
+        foreach($queryForAllPaperTitles->result_array() as $sentence){
+            $reg = "/[[:punct:]]/i";  
+            $words = explode(' ',preg_replace($reg, ' ', $sentence["title"]));
+            foreach($words as $word){
+                if(strlen($word)<=3)
+                    continue;
+                if(!isset($allWords[$word])){
+                    $allWords[$word]=0;
+                }
+                $allWords[$word]+=1;
+            }
+        }
+        $result=array();
+        $num=count($allWords);
+        $i=0;
+        arsort($allWords);
+        foreach($allWords as $word=>$times){
+            if($i==$maxNum)
+                break;
+            array_push($result, array("label"=>ucwords($word),"value"=>$times,"url"=>"#tagCloud","target"=>"_self"));
+            $i+=1;
+        }
+        return $result;
+
+    }
 }
 
 ?>
