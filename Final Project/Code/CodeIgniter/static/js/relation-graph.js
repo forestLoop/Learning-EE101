@@ -7,12 +7,12 @@ var svg = d3.select("svg"),
     */
 var svg = d3.select("#forceGraph")
             .attr("preserveAspectRatio", "xMidYMid meet")
-            .attr("viewBox", "0 0 350 350")
+            .attr("viewBox", "0 0 800 400")
 //console.log(width,height);
 
 //var color = d3.scaleOrdinal(d3.schemeCategory20);
 //var color=d3.scaleOrdinal(['#25c6fc','#e03636','#edd0be','#5d9431'])
-var width=350,height=350;
+var width=800,height=400;
 function color(d)
 {
   return ['#25c6fc','#e03636','#edd0be','#5d9431'][d]
@@ -23,9 +23,8 @@ var simulation = d3.forceSimulation()
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-var type=1;
 var api="/api/graph/author-relation";
-var jsonSource=[api,authorID,type].join("/");
+var jsonSource=[api,authorID].join("/");
 console.log(jsonSource);
 
 d3.json(jsonSource, function(error, graph) {
@@ -59,7 +58,8 @@ d3.json(jsonSource, function(error, graph) {
         return d.authorName;
       })
       .attr('x', 6)
-      .attr('y', 3);
+      .attr('y', 3)
+      .attr("class","hideMe");
 
   node.append("title")
       .text(function(d) { return d.id; });

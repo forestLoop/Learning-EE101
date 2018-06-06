@@ -45,8 +45,11 @@ h1{
 }
 
 g text {
-  display: none;
   font-size: 15px;
+}
+
+.hideMe{
+    display: none;
 }
 
 button{
@@ -426,6 +429,10 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
     background-color: #f5f6fa;
     margin-bottom: 60px;
 }
+#relationGraph,#activityGraph{
+    background-color: #f5f6fa;
+    margin-bottom: 60px;
+}
 
 
 /* Others*/
@@ -490,3 +497,54 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
 }
 
 
+
+/*Line Chart*/
+.axis {
+    font: 10px;
+}
+
+.axis path,.axis line {
+  fill: none;
+  stroke: #D4D8DA;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke: #1abc9c;
+  stroke-width: 5px;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: #F1F3F3;
+  stroke: #1abc9c;
+  stroke-width: 5px;
+}
+  
+.hover-line {
+  stroke: #1abc9c;
+  stroke-width: 2px;
+  stroke-dasharray: 3,3;
+}
+
+/*For responsive svg graphs*/
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 50%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

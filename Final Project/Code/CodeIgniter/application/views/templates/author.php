@@ -69,7 +69,6 @@
 			<?endforeach;?>
 			</ul>
 		</div>
-		
 	</div>
 
 	<div class="rightContainer">
@@ -130,9 +129,23 @@
     				Relation Graph
     			</a>
     		</div>
-    		<svg id="forceGraph" width="800" height="600">
-    			<script src="/static/js/relation-graph.js"></script>
-    		</svg>
+    		<div class="svg-container">
+    			<svg class="svg-content" id="forceGraph">
+    				<script src="/static/js/relation-graph.js"></script>
+    			</svg>
+    		</div>
+    	</div>
+    	<div id="activityGraph">
+    		<div class="titleOfContainer">
+    			<a href="#activityGraph" name="activityGraph">
+    				Activity Graph
+    			</a>
+    		</div>
+    		<div class="svg-container">
+    			<script src="/static/js/author-activity-graph.js"></script>
+    			<svg class="svg-content" id="authorActivityGraph">
+    			</svg>
+    		</div>
     	</div>
 	</div>
 </div>
