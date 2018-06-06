@@ -313,6 +313,23 @@ class Author_info_model extends CI_Model{
         );
         return $queryForRelatedConferences->result_array();
     }
+
+    public function get_author_activity($authorID=NULL)
+    {
+        $queryForPaperNumYearly=$this->db->query(
+            "SELECT papers.paperpublishyear AS year,count(*) AS value 
+            FROM papers,paper_author_affiliation 
+            WHERE papers.paperid=paper_author_affiliation.paperid 
+                AND paper_author_affiliation.authorid='$authorID' 
+            GROUP BY papers.paperpublishyear 
+            ORDER BY papers.paperpublishyear;"
+        );
+        $result=array();
+        foreach($queryForPaperNumYearly->result_array() as $row){
+            array_push($result, array("year"=>$row["year"],"value"=>(int)$row["value"]));
+        }
+        return $result;
+    }
 }
 
 ?>
