@@ -325,8 +325,14 @@ class Author_info_model extends CI_Model{
             ORDER BY papers.paperpublishyear;"
         );
         $result=array();
+        $prevYear=0;
         foreach($queryForPaperNumYearly->result_array() as $row){
+            while($prevYear!=0 and $row["year"]!=$prevYear+1){
+                $prevYear+=1;
+                array_push($result,array("year"=>$prevYear,"value"=>0));
+            }
             array_push($result, array("year"=>$row["year"],"value"=>(int)$row["value"]));
+            $prevYear=(int)$row["year"];
         }
         return $result;
     }
