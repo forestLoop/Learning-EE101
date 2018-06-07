@@ -7,6 +7,7 @@ class Page extends CI_Controller{
             parent::__construct();
             $this->load->model('Search_result_model');
             $this->load->model('Author_info_model');
+            $this->load->model('Paper_info_model');
             $this->load->helper('url_helper');
     }
 
@@ -196,6 +197,56 @@ class Page extends CI_Controller{
             
             $this->load->view("templates/footer.php",$data);
 
+        }
+    }
+
+    public function paper($paperID=NULL)
+    {
+        if(!$paperID){
+            $data["title"]="Error!";
+            $data["errorMsg"]="Invalid Paper ID!";
+            $this->load->view("templates/header.php",$data);
+            $this->load->view("templates/error.php",$data);
+            $this->load->view("templates/footer.php");
+        }else{
+            $data["paperInfo"]=$this->Paper_info_model->get_basic_info($paperID);
+            if(!$data["paperInfo"]){
+                $data["title"]="Error!";
+                $data["errorMsg"]="Can't Find This Paper!";
+                $this->load->view("templates/header.php",$data);
+                $this->load->view("templates/error.php",$data);
+            }else{
+                $data["title"]=ucwords($data["paperInfo"]["title"]);
+                $data["papersCitingThis"]=$this->Paper_info_model->get_papers_citing_this($paperID);
+                $data["papersCitedByThis"]=$this->Paper_info_model->get_papers_cited_by_this($paperID);
+                $data["papersCitingThisNum"]=$this->Paper_info_model->get_number_papers_citing_this($paperID);
+                $data["papersCitedByThisNum"]=$this->Paper_info_model->get_number_papers_cited_by_this($paperID);
+                $pageSize=10;
+                $papersCitingThisMaxPage=(int)(($data["papersCitingThisNum"]-1)/$pageSize)+1;
+                $papersCitedByThisMaxPage=(int)(($data["papersCitedByThisNum"]-1)/$pageSize)+1;
+                $data["papersCitingThisMaxPage"]=$papersCitingThisMaxPage;
+                $data["papersCitedByThisMaxPage"]=$papersCitedByThisMaxPage;
+                $data["papersCitingThisCurrentPage"]=1;
+                $data["papersCitedByThisCurrentPage"]=1;
+                $data["script"]="
+                var paperID='$paperID';
+
+                var papersCitingThisCurrentPage=1;
+                var papersCitingThisMaxPage=$papersCitingThisMaxPage;
+                var papersCitingThisPageSize=$pageSize;
+                var papersCitingThisApiUrl='/api/get_papers/papers-citing-this';
+                $(function(){checkButtonStatus('papersCitingThis')});
+
+                var papersCitedByThisCurrentPage=1;
+                var papersCitedByThisMaxPage=$papersCitedByThisMaxPage;
+                var papersCitedByThisPageSize=$pageSize;
+                var papersCitedByThisApiUrl='/api/get_papers/papers-cited-by-this';
+                $(function(){checkButtonStatus('papersCitedByThis')});
+                ";
+                $this->load->view("templates/header.php",$data);
+                $this->load->view("templates/paper.php",$data);
+            }
+            $this->load->view("templates/footer.php");
         }
     }
 }
