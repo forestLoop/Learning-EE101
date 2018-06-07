@@ -438,6 +438,33 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
     margin-bottom: 60px;
 }
 
+/*Paper Page*/
+#paperBasicInfo{
+    padding:20px;
+    background-color: #f5f6fa;
+    margin-bottom: 60px;
+}
+
+#paperPageAuthors{
+    background-color: #f5f6fa;
+    margin-bottom: 60px;
+}
+
+td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.paperPageTitle{
+    width:55%;
+}
+
+.papePageYear,.paperPageConference,.paperPageCitations{
+    width:15%;
+    text-align: center;
+}
+
+
 
 /* Others*/
 

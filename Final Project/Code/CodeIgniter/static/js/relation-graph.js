@@ -7,12 +7,12 @@ var svg = d3.select("svg"),
     */
 var svg = d3.select("#forceGraph")
             .attr("preserveAspectRatio", "xMidYMid meet")
-            .attr("viewBox", "0 0 800 400")
+            .attr("viewBox", "0 0 600 300")
 //console.log(width,height);
 
 //var color = d3.scaleOrdinal(d3.schemeCategory20);
 //var color=d3.scaleOrdinal(['#25c6fc','#e03636','#edd0be','#5d9431'])
-var width=800,height=400;
+var width=600,height=300;
 function color(d)
 {
   return ['#25c6fc','#e03636','#edd0be','#5d9431'][d]
