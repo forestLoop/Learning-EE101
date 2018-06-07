@@ -9,7 +9,7 @@
 		}
 		echo "$number $noun $verb";
 	}
-
+	
 ?>
 
 <div class="mainContainer">
