@@ -479,6 +479,24 @@ td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
     overflow: auto;
 }
 
+/*Conference Page*/
+.textContainer{
+    padding: 20px;
+    background-color: #f5f6fa;
+    margin-bottom: 60px;
+}
+
+.listContainer{
+    background-color: #f5f6fa;
+    margin-bottom: 60px;
+    padding: 20px;
+}
+
+.listContainer ul{
+    margin: 0;
+    padding: 0px;
+    list-style: none;
+}
 
 
 /* Others*/

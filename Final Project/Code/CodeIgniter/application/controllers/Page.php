@@ -268,19 +268,19 @@ class Page extends CI_Controller{
             }else{
                 $data["title"]=ucwords($data["basicInfo"]["conferenceName"]);
                 $data["topAuthors"]=$this->Conference_info_model->get_top_authors($conferenceID,0,15);
-                $data["papersOfConference"]=$this->Conference_info_model->get_top_papers($conferenceID);
+                $data["topPapersOfConference"]=$this->Conference_info_model->get_top_papers($conferenceID);
                 $pageSize=10;
-                $papersOfConferenceMaxPage=(int)(($data["basicInfo"]["paperNum"]-1)/$pageSize)+1;
-                $data["papersOfConferenceMaxPage"]=$papersOfConferenceMaxPage;
-                $data["papersOfConferenceCurrentPage"]=1;
+                $topPapersOfConferenceMaxPage=(int)(($data["basicInfo"]["paperNum"]-1)/$pageSize)+1;
+                $data["topPapersOfConferenceMaxPage"]=$topPapersOfConferenceMaxPage;
+                $data["topPapersOfConferenceCurrentPage"]=1;
                 $data["script"]="
                 var conferenceID='$conferenceID';
 
-                var papersOfConferenceCurrentPage=1;
-                var papersOfConferenceMaxPage=$papersOfConferenceMaxPage;
-                var papersOfConferencePageSize=$pageSize;
-                var papersOfConferenceApiUrl='/api/get_papers/conference';
-                $(function(){checkButtonStatus('papersOfConference')});
+                var topPapersOfConferenceCurrentPage=1;
+                var topPapersOfConferenceMaxPage=$topPapersOfConferenceMaxPage;
+                var topPapersOfConferencePageSize=$pageSize;
+                var topPapersOfConferenceApiUrl='/api/get_papers/conference';
+                $(function(){checkButtonStatus('topPapersOfConference')});
                 ";
                 $this->load->view("templates/header.php",$data);
                 $this->load->view("templates/conference.php",$data);

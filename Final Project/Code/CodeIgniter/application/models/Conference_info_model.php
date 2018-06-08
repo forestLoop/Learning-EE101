@@ -4,6 +4,7 @@ class Conference_info_model extends CI_Model{
 	public function __construct()
 	{
 		$this->load->database();
+		$this->load->model("Search_result_model");
 	}
 
 	public function get_basic_info($conferenceID)
@@ -59,6 +60,7 @@ class Conference_info_model extends CI_Model{
 			$row["title"]=ucwords($row["title"]);
 			$row["paperPublishYear"]=(int)$row["paperPublishYear"];
 			$row["citations"]=(int)$row["citations"];
+			$row["authors"]=$this->Search_result_model->get_authors_of_paper($row["paperID"]);
 			array_push($result, $row);
 		}
 		return $result;
