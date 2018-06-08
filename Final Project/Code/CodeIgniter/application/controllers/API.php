@@ -7,6 +7,7 @@ class API extends CI_Controller{
 		parent::__construct();
 		$this->load->model('Search_result_model');
 		$this->load->model('Author_info_model');
+		$this->load->model('Paper_info_model');
 	}
  
 	public function index()
@@ -67,33 +68,50 @@ class API extends CI_Controller{
 		if(!$ID or !$type){
 			$json["success"]=0;
 			$json["reason"]="Please specify the ID.";
-		}else if(!in_array($type, array("author","conference","affiliation"))){
-			$json["success"]=0;
-			$json["reason"]="Invalid type!";
-		}else{
-			$paperNum=$this->Author_info_model->get_paper_number($ID);
-			if($paperNum["all"]==0){
+		}
+		switch($type){
+			case "author":
+				$paperNum=$this->Author_info_model->get_paper_number($ID)["all"];
+				$model="Author_info_model";
+				$function="get_papers";
+				break;
+			case "citing-this":
+				$paperNum=$this->Paper_info_model->get_number_papers_citing_this($ID);
+				$model="Paper_info_model";
+				$function="get_papers_citing_this";
+				break;
+			case "cited-by-this":
+				$paperNum=$this->Paper_info_model->get_number_papers_cited_by_this($ID);
+				$model="Paper_info_model";
+				$function="get_papers_cited_by_this";
+				break;
+			default:
 				$json["success"]=0;
-				$json["reason"]="No paper found!";
+				$json["reason"]="Invalid type!";
+				$this->load->view("templates/json.php",$data);
+				return;			
+		}	
+		if($paperNum==0){
+			$json["success"]=0;
+			$json["reason"]="No paper found!";
+		}else{
+			$maxPage=(int)(($paperNum-1)/$pageSize)+1;
+			if($page>$maxPage){
+				$json["success"]=0;
+				$json["paperNum"]=$paperNum;
+				$json["pageSize"]=$pageSize;
+				$json["maxPage"]=$maxPage;
+				$json["page"]=$page;
+				$json["reason"]="Out of page limit!";
 			}else{
-				$maxPage=(int)(($paperNum["all"]-1)/$pageSize)+1;
-				if($page>$maxPage){
-					$json["success"]=0;
-					$json["paperNum"]=$paperNum;
-					$json["pageSize"]=$pageSize;
-					$json["maxPage"]=$maxPage;
-					$json["page"]=$page;
-					$json["reason"]="Out of page limit!";
-				}else{
-					$json["success"]=1;
-					$json["paperNum"]=$paperNum;
-					$json["pageSize"]=$pageSize;
-					$json["maxPage"]=$maxPage;
-					$json["page"]=$page;
-					$begin=$pageSize*($page-1);
-					$json["papers"]=$this->Author_info_model->get_papers($ID,$begin,$pageSize,$paperNum);
-					$json["itemNum"]=count($json["papers"]);
-				}
+				$json["success"]=1;
+				$json["paperNum"]=$paperNum;
+				$json["pageSize"]=$pageSize;
+				$json["maxPage"]=$maxPage;
+				$json["page"]=$page;
+				$begin=$pageSize*($page-1);
+				$json["papers"]=$this->$model->$function($ID,$begin,$pageSize);
+				$json["itemNum"]=count($json["papers"]);
 			}
 		}
 		$data["json"]=$json;
