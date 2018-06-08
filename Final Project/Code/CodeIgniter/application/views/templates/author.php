@@ -145,8 +145,8 @@
     			</a>
     		</div>
     		<div class="svg-container">
+    			<script src="/static/js/relation-graph.js"></script>
     			<svg class="svg-content" id="forceGraph">
-    				<script src="/static/js/relation-graph.js"></script>
     			</svg>
     		</div>
     	</div>

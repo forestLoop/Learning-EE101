@@ -190,7 +190,6 @@ class Page extends CI_Controller{
                 $this->load->view("templates/error.php",$data);
             }else{
                 $data["title"]=ucwords($data["author_info"]["authorName"])."'s Page";
-                $data["extra"]="<script src=\"/static/js/relation-graph.js\"></script>";
                 $this->load->view("templates/header.php",$data);
                 $this->load->view("templates/author.php",$data);
             }
