@@ -447,7 +447,13 @@ td.affiliationName,td.affiliationPaperNum,td.affiliationAuthorNum,td.affiliation
 
 #paperPageAuthors{
     background-color: #f5f6fa;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin-bottom: 60px;
+}
+
+#paperPageAuthors ol{
+    margin: 0;
 }
 
 td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
@@ -462,6 +468,15 @@ td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
 .papePageYear,.paperPageConference,.paperPageCitations{
     width:15%;
     text-align: center;
+}
+
+#paperDescription{
+    padding: 20px;
+    background-color: #f5f6fa;
+    text-indent: 30px;
+    word-break: break-all;
+    max-height: 500px;
+    overflow: auto;
 }
 
 
@@ -544,7 +559,7 @@ td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
 .line {
   fill: none;
   stroke: #1abc9c;
-  stroke-width: 5px;
+  stroke-width: 3px;
 }
 
 .overlay {
@@ -572,6 +587,7 @@ td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
     padding-bottom: 50%;
     vertical-align: top;
     overflow: hidden;
+    background-color: #f5f6fa;
 }
 
 .left-svg-container{

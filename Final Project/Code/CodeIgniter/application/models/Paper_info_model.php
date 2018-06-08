@@ -113,6 +113,33 @@
 			return $result;
 		}
 
+		public function get_citations_yearly($paperID)
+		{
+			$queryForCitationsYearly=$this->db->query(
+				"SELECT paperPublishYear AS year,count(*) AS num FROM papers,paper_reference 
+				WHERE paper_reference.referenceid='$paperID' 
+					AND papers.paperid=paper_reference.paperid 
+				GROUP BY paperpublishyear 
+				ORDER BY paperpublishyear ASC;"
+			);
+			$prevYear=0;
+			$result=array();
+			foreach($queryForCitationsYearly->result_array() as $row){
+				if($prevYear==0){
+					$prevYear=(int)$row["year"]-1;
+					array_push($result,array("year"=>$prevYear,"citations"=>0));
+				}
+				while($prevYear+1!=$row["year"]){
+					$prevYear+=1;
+					array_push($result, array("year"=>$prevYear,"citations"=>0));
+				}
+				array_push($result, array("year"=>(int)$row["year"],"citations"=>(int)$row["num"]));
+				$prevYear=(int)$row["year"];
+			}
+			array_push($result, array("year"=>$prevYear+1,"citations"=>0));
+			return $result;
+		}
+
 	}
 
 ?>

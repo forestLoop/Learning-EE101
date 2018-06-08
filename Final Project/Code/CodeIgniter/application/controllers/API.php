@@ -141,6 +141,12 @@ class API extends CI_Controller{
 				$json=$this->Author_info_model->get_author_words($query,25);
 				$data["json"]=$json;
 				$this->load->view("templates/json.php",$data);
+				break;
+			case "paper-citations":
+				$json=$this->Paper_info_model->get_citations_yearly($query);
+				$data["json"]=$json;
+				$this->load->view("templates/json.php",$data);
+				break;
 			default:
 				break;
 		}

@@ -42,6 +42,20 @@
 				<?endforeach;?>
 			</ol>
 		</div>
+		<div class="titleOfContainer">
+			<a href="#paperDescription" name="paperDescription">
+				Description
+			</a>
+		</div>
+		<div id="paperDescription">
+			The study is to show how even a "sport" video game can incorporate many types of learning, 
+			to call attention to what might be overlooked as significant forms of learning, 
+			and to understand and take advantage of the opportunities video games afford as 
+			more deliberate learning environments. The aspects explored are the skills and 
+			techniques required to be successful in the game, the environment that skaters skate in,
+			the personal vs. group identity that is shown through the general appearance of the skater, 
+			and the values and icons that the game teaches players. 
+		</div>
 	</div>
 	<div class="rightContainer">
 		<div class="titleOfContainer">
@@ -127,6 +141,13 @@
         		<span class="pageInfo">Page <span id="papersCitingThisCurrentPage" class="currentPage"><?=$papersCitingThisCurrentPage?></span> of <?=$papersCitingThisMaxPage?></span>
         		<button type="button" id="papersCitingThisResultNext" class="resultNext">Next</button>
     		</div>
+		</div>
+		<div class="titleOfContainer">
+			<a href="#citationsGraph" name="citationsGraph">Citations Graph</a>
+		</div>
+		<div class="svg-container">
+			<script src="/static/js/paper-citations-graph.js"></script>
+			<svg class="svg-content" id="paperCitationsGraph"></svg>
 		</div>
 	</div>
 </div>
