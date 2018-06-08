@@ -8,6 +8,7 @@ class Page extends CI_Controller{
             $this->load->model('Search_result_model');
             $this->load->model('Author_info_model');
             $this->load->model('Paper_info_model');
+            $this->load->model('Conference_info_model');
             $this->load->helper('url_helper');
     }
 
@@ -244,6 +245,45 @@ class Page extends CI_Controller{
                 ";
                 $this->load->view("templates/header.php",$data);
                 $this->load->view("templates/paper.php",$data);
+            }
+            $this->load->view("templates/footer.php");
+        }
+    }
+
+    public function conference($conferenceID=NULL)
+    {
+        if(!$conferenceID){
+            $data["title"]="Error!";
+            $data["errorMsg"]="Invalid Conference ID!";
+            $this->load->view("templates/header.php",$data);
+            $this->load->view("templates/error.php",$data);
+            $this->load->view("templates/footer.php");
+        }else{
+            $data["basicInfo"]=$this->Conference_info_model->get_basic_info($conferenceID);
+            if(!$data["basicInfo"]){
+                $data["title"]="Error!";
+                $data["errorMsg"]="Can't Find This Conference!";
+                $this->load->view("templates/header.php",$data);
+                $this->load->view("templates/error.php",$data);
+            }else{
+                $data["title"]=ucwords($data["basicInfo"]["conferenceName"]);
+                $data["topAuthors"]=$this->Conference_info_model->get_top_authors($conferenceID,0,15);
+                $data["papersOfConference"]=$this->Conference_info_model->get_top_papers($conferenceID);
+                $pageSize=10;
+                $papersOfConferenceMaxPage=(int)(($data["basicInfo"]["paperNum"]-1)/$pageSize)+1;
+                $data["papersOfConferenceMaxPage"]=$papersOfConferenceMaxPage;
+                $data["papersOfConferenceCurrentPage"]=1;
+                $data["script"]="
+                var conferenceID='$conferenceID';
+
+                var papersOfConferenceCurrentPage=1;
+                var papersOfConferenceMaxPage=$papersOfConferenceMaxPage;
+                var papersOfConferencePageSize=$pageSize;
+                var papersOfConferenceApiUrl='/api/get_papers/conference';
+                $(function(){checkButtonStatus('papersOfConference')});
+                ";
+                $this->load->view("templates/header.php",$data);
+                $this->load->view("templates/conference.php",$data);
             }
             $this->load->view("templates/footer.php");
         }
