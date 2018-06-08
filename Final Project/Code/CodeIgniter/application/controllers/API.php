@@ -88,6 +88,7 @@ class API extends CI_Controller{
 			default:
 				$json["success"]=0;
 				$json["reason"]="Invalid type!";
+				$data["json"]=$json;
 				$this->load->view("templates/json.php",$data);
 				return;			
 		}	
@@ -98,17 +99,17 @@ class API extends CI_Controller{
 			$maxPage=(int)(($paperNum-1)/$pageSize)+1;
 			if($page>$maxPage){
 				$json["success"]=0;
-				$json["paperNum"]=$paperNum;
-				$json["pageSize"]=$pageSize;
-				$json["maxPage"]=$maxPage;
-				$json["page"]=$page;
+				$json["paperNum"]=(int)$paperNum;
+				$json["pageSize"]=(int)$pageSize;
+				$json["maxPage"]=(int)$maxPage;
+				$json["page"]=(int)$page;
 				$json["reason"]="Out of page limit!";
 			}else{
 				$json["success"]=1;
-				$json["paperNum"]=$paperNum;
-				$json["pageSize"]=$pageSize;
-				$json["maxPage"]=$maxPage;
-				$json["page"]=$page;
+				$json["paperNum"]=(int)$paperNum;
+				$json["pageSize"]=(int)$pageSize;
+				$json["maxPage"]=(int)$maxPage;
+				$json["page"]=(int)$page;
 				$begin=$pageSize*($page-1);
 				$json["papers"]=$this->$model->$function($ID,$begin,$pageSize);
 				$json["itemNum"]=count($json["papers"]);

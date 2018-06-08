@@ -112,6 +112,36 @@ function fillAuthorPagePaperTable(data)
 	$("#authorPageCurrentPage").text(authorPageCurrentPage);
 }
 
+function fillPapersCitedByThisTable(data)
+{
+	fillPaperPageTable(data,"#papersCitedByThisTable");
+	$("#papersCitedByThisCurrentPage").text(papersCitedByThisCurrentPage);
+}
+
+function fillPapersCitingThisTable(data)
+{
+	fillPaperPageTable(data,"#papersCitingThisTable");
+	$("#papersCitingThisCurrentPage").text(papersCitingThisCurrentPage);
+}
+
+function fillPaperPageTable(data,tableID)
+{
+	$(tableID).find(".dataRow").each(function(index){
+		if(index>=data["itemNum"]){
+			$(this).hide();
+		}else{
+			$(this).show();
+			var singlePaper=data["papers"][index];
+			$(this).children(".paperPageTitle").find("a").attr("href","/paper/"+singlePaper["paperID"]);
+			$(this).children(".paperPageTitle").find("a").text(singlePaper["title"]);
+			$(this).children(".paperPageYear").text(singlePaper["paperPublishYear"]);
+			$(this).children(".paperPageConference").find("a").attr("href","/conference/"+singlePaper["conferenceID"]);
+			$(this).children(".paperPageConference").find("a").text(singlePaper["conferenceName"]);
+			$(this).children(".paperPageCitations").text(singlePaper["citations"]);
+		}
+	})
+}
+
 
 function checkButtonStatus(prefix)
 {
@@ -197,6 +227,36 @@ $(function(){
 });
 
 $(function(){
+	$("#papersCitedByThisResultNext").click(function(){
+		if(papersCitedByThisCurrentPage<papersCitedByThisMaxPage){
+			var papersCitedByThisNextPage=papersCitedByThisCurrentPage+1;
+			var papersCitedByThisTargetUrl=[papersCitedByThisApiUrl,paperID,papersCitedByThisNextPage.toString(),papersCitedByThisPageSize.toString()].join('/');
+			console.log(papersCitedByThisTargetUrl);
+			$.getJSON(papersCitedByThisTargetUrl,function(data){
+				papersCitedByThisCurrentPage=papersCitedByThisNextPage;
+				fillPapersCitedByThisTable(data);
+				checkButtonStatus("papersCitedByThis");
+			});
+		}
+})
+});
+
+$(function(){
+	$("#papersCitingThisResultNext").click(function(){
+		if(papersCitingThisCurrentPage<papersCitingThisMaxPage){
+			var papersCitingThisNextPage=papersCitingThisCurrentPage+1;
+			var papersCitingThisTargetUrl=[papersCitingThisApiUrl,paperID,papersCitingThisNextPage.toString(),papersCitingThisPageSize.toString()].join('/');
+			console.log(papersCitingThisTargetUrl);
+			$.getJSON(papersCitingThisTargetUrl,function(data){
+				papersCitingThisCurrentPage=papersCitingThisNextPage;
+				fillPapersCitingThisTable(data);
+				checkButtonStatus("papersCitingThis");
+			});
+		}
+})
+});
+
+$(function(){
 	$("#authorResultPrev").click(function(){
 		if(authorCurrentPage>1){
 			var authorPrevPage=authorCurrentPage-1;
@@ -268,4 +328,36 @@ $(function(){
 		}
 })
 });
+
+$(function(){
+	$("#papersCitedByThisResultPrev").click(function(){
+		if(papersCitedByThisCurrentPage>1){
+			var papersCitedByThisPrevPage=papersCitedByThisCurrentPage-1;
+			var papersCitedByThisTargetUrl=[papersCitedByThisApiUrl,paperID,papersCitedByThisPrevPage.toString(),papersCitedByThisPageSize.toString()].join('/');
+			console.log(papersCitedByThisTargetUrl);
+			$.getJSON(papersCitedByThisTargetUrl,function(data){
+				papersCitedByThisCurrentPage=papersCitedByThisPrevPage;
+				fillPapersCitedByThisTable(data);
+				checkButtonStatus("papersCitedByThis");
+			});
+		}
+})
+});
+
+$(function(){
+	$("#papersCitingThisResultPrev").click(function(){
+		if(papersCitingThisCurrentPage>1){
+			var papersCitingThisPrevPage=papersCitingThisCurrentPage-1;
+			var papersCitingThisTargetUrl=[papersCitingThisApiUrl,paperID,papersCitingThisPrevPage.toString(),papersCitingThisPageSize.toString()].join('/');
+			console.log(papersCitingThisTargetUrl);
+			$.getJSON(papersCitingThisTargetUrl,function(data){
+				papersCitingThisCurrentPage=papersCitingThisPrevPage;
+				fillPapersCitingThisTable(data);
+				checkButtonStatus("papersCitingThis");
+			});
+		}
+})
+});
+
+
 

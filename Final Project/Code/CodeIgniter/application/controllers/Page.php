@@ -234,13 +234,13 @@ class Page extends CI_Controller{
                 var papersCitingThisCurrentPage=1;
                 var papersCitingThisMaxPage=$papersCitingThisMaxPage;
                 var papersCitingThisPageSize=$pageSize;
-                var papersCitingThisApiUrl='/api/get_papers/papers-citing-this';
+                var papersCitingThisApiUrl='/api/get_papers/citing-this';
                 $(function(){checkButtonStatus('papersCitingThis')});
 
                 var papersCitedByThisCurrentPage=1;
                 var papersCitedByThisMaxPage=$papersCitedByThisMaxPage;
                 var papersCitedByThisPageSize=$pageSize;
-                var papersCitedByThisApiUrl='/api/get_papers/papers-cited-by-this';
+                var papersCitedByThisApiUrl='/api/get_papers/cited-by-this';
                 $(function(){checkButtonStatus('papersCitedByThis')});
                 ";
                 $this->load->view("templates/header.php",$data);
