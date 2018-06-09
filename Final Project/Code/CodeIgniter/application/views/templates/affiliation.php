@@ -72,6 +72,7 @@
 					<tr>
 						<th class="affiliationPaperTitle">Paper</th>
 						<th class="affiliationPaperYear">Year</th>
+						<th class="affiliationPaperConference">Conference</th>
 						<th class="affiliationPaperCitations">Citations</th>
 						<th class="affiliationPaperAuthors">Authors</th>
 					</tr>
@@ -84,6 +85,11 @@
 						</td>
 						<td class="affiliationPaperYear">
 							<?=$paper["paperPublishYear"]?>
+						</td>
+						<td class="affiliationPaperConference">
+							<a href="/conference/<?=$paper["conferenceID"]?>">
+								<?=$paper["conferenceName"]?>
+							</a>
 						</td>
 						<td class="affiliationPaperCitations">
 							<?=$paper["citations"]?>

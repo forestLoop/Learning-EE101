@@ -9,6 +9,7 @@ class API extends CI_Controller{
 		$this->load->model('Author_info_model');
 		$this->load->model('Paper_info_model');
 		$this->load->model('Conference_info_model');
+		$this->load->model('Affiliation_info_model');
 	}
  
 	public function index()
@@ -92,6 +93,12 @@ class API extends CI_Controller{
 				$model="Conference_info_model";
 				$function="get_top_papers";
 				break;
+			case "affiliation":
+				$paperNum=$this->Affiliation_info_model->get_basic_info($ID)["paperNum"];
+				$paperNum=(int)$paperNum;
+				$model="Affiliation_info_model";
+				$function="get_top_papers";
+				break;
 			default:
 				$json["success"]=0;
 				$json["reason"]="Invalid type!";
@@ -152,6 +159,10 @@ class API extends CI_Controller{
 					break;
 				case "conference-papers":
 					$json=$this->Conference_info_model->get_papers_num_yearly($query);
+					$data["json"]=$json;
+					break;
+				case "affiliation-papers":
+					$json=$this->Affiliation_info_model->get_papers_num_yearly($query);
 					$data["json"]=$json;
 					break;
 				default:

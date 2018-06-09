@@ -166,6 +166,31 @@ function fillTopPapersOfConferenceTable(data)
 	$("#topPapersOfConferenceCurrentPage").text(topPapersOfConferenceCurrentPage);
 }
 
+function fillTopPapersOfAffiliationTable(data)
+{
+	$("#topPapersOfAffiliationTable").find(".dataRow").each(function(index){
+		if(index>=data["itemNum"]){
+			$(this).hide();
+		}else{
+			$(this).show();
+			var singlePaper=data["papers"][index];
+			$(this).children(".affiliationPaperTitle").find("a").attr("href","/paper/"+singlePaper["paperID"]);
+			$(this).children(".affiliationPaperTitle").find("a").text(singlePaper["title"]);
+			$(this).children(".affiliationPaperConference").find("a").attr("href","/conference/"+singlePaper["conferenceID"]);
+			$(this).children(".affiliationPaperConference").find("a").text(singlePaper["conferenceName"]);
+			$(this).children(".affiliationPaperYear").text(singlePaper["paperPublishYear"]);
+			$(this).children(".affiliationPaperCitations").text(singlePaper["citations"]);
+			$(this).children(".affiliationPaperAuthors").find("ol").empty();
+			var authors=singlePaper["authors"];
+			for(var i=0,len=authors.length;i!=len;i++){
+				var content='<li><a href="/author/'+authors[i]["authorID"]+'">'+authors[i]["authorName"]+'</a></li>';
+				$(this).children(".affiliationPaperAuthors").find("ol").append(content);
+			}
+		}
+	});
+	$("#topPapersOfConferenceCurrentPage").text(topPapersOfConferenceCurrentPage);
+}
+
 function checkButtonStatus(prefix)
 {
 	$("#"+prefix+"ResultPrev").attr("disabled",eval(prefix+"CurrentPage")<=1);
@@ -295,6 +320,21 @@ $(function(){
 });
 
 $(function(){
+	$("#topPapersOfAffiliationResultNext").click(function(){
+		if(topPapersOfAffiliationCurrentPage<topPapersOfAffiliationMaxPage){
+			var topPapersOfAffiliationNextPage=topPapersOfAffiliationCurrentPage+1;
+			var topPapersOfAffiliationTargetUrl=[topPapersOfAffiliationApiUrl,affiliationID,topPapersOfAffiliationNextPage.toString(),topPapersOfAffiliationPageSize.toString()].join('/');
+			console.log(topPapersOfAffiliationTargetUrl);
+			$.getJSON(topPapersOfAffiliationTargetUrl,function(data){
+				topPapersOfAffiliationCurrentPage=topPapersOfAffiliationNextPage;
+				fillTopPapersOfAffiliationTable(data);
+				checkButtonStatus("topPapersOfAffiliation");
+			});
+		}
+})
+});
+
+$(function(){
 	$("#authorResultPrev").click(function(){
 		if(authorCurrentPage>1){
 			var authorPrevPage=authorCurrentPage-1;
@@ -407,6 +447,21 @@ $(function(){
 				topPapersOfConferenceCurrentPage=topPapersOfConferencePrevPage;
 				fillTopPapersOfConferenceTable(data);
 				checkButtonStatus("topPapersOfConference");
+			});
+		}
+})
+});
+
+$(function(){
+	$("#topPapersOfAffiliationResultPrev").click(function(){
+		if(topPapersOfAffiliationCurrentPage>1){
+			var topPapersOfAffiliationPrevPage=topPapersOfAffiliationCurrentPage-1;
+			var topPapersOfAffiliationTargetUrl=[topPapersOfAffiliationApiUrl,affiliationID,topPapersOfAffiliationPrevPage.toString(),topPapersOfAffiliationPageSize.toString()].join('/');
+			console.log(topPapersOfAffiliationTargetUrl);
+			$.getJSON(topPapersOfAffiliationTargetUrl,function(data){
+				topPapersOfAffiliationCurrentPage=topPapersOfAffiliationPrevPage;
+				fillTopPapersOfAffiliationTable(data);
+				checkButtonStatus("topPapersOfAffiliation");
 			});
 		}
 })

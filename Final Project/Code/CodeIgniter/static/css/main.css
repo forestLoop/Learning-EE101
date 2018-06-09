@@ -523,6 +523,27 @@ td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
     margin-bottom: 60px;
 }
 
+/*Affiliation Page*/
+#affiliationPapersYearly{
+    margin-bottom: 60px;
+}
+
+.affiliationPaperTitle{
+    width:35%;
+}
+
+.affiliationPaperYear,.affiliationPaperConference,.affiliationPaperCitations{
+    width:15%;
+    text-align: center;
+}
+
+.affiliationPaperAuthors{
+    width:20%;
+}
+
+.affiliationPaperAuthors ol{
+    padding-left: 25px;
+}
 
 
 /* Others*/
