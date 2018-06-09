@@ -142,12 +142,14 @@
         		<button type="button" id="papersCitingThisResultNext" class="resultNext">Next</button>
     		</div>
 		</div>
+		<div id="citationsGraph">
 		<div class="titleOfContainer">
 			<a href="#citationsGraph" name="citationsGraph">Citations Graph</a>
 		</div>
 		<div class="svg-container">
 			<script src="/static/js/paper-citations-graph.js"></script>
 			<svg class="svg-content" id="paperCitationsGraph"></svg>
+		</div>
 		</div>
 	</div>
 </div>

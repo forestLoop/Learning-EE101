@@ -479,6 +479,10 @@ td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
     overflow: auto;
 }
 
+#citationsGraph{
+    margin-bottom: 60px;
+}
+
 /*Conference Page*/
 .textContainer{
     padding: 20px;
