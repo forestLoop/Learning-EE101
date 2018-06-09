@@ -8,6 +8,7 @@ class API extends CI_Controller{
 		$this->load->model('Search_result_model');
 		$this->load->model('Author_info_model');
 		$this->load->model('Paper_info_model');
+		$this->load->model('Conference_info_model');
 	}
  
 	public function index()
@@ -85,6 +86,12 @@ class API extends CI_Controller{
 				$model="Paper_info_model";
 				$function="get_papers_cited_by_this";
 				break;
+			case "conference":
+				$paperNum=$this->Conference_info_model->get_basic_info($ID)["paperNum"];
+				$paperNum=(int)$paperNum;
+				$model="Conference_info_model";
+				$function="get_top_papers";
+				break;
 			default:
 				$json["success"]=0;
 				$json["reason"]="Invalid type!";
@@ -123,33 +130,35 @@ class API extends CI_Controller{
 	{
 		if(!$type or !$query){
 			$data=array();
+		}else{
+			$data=array();
+			$json=array();
+			switch($type){
+				case "author-relation":
+					$json=$this->Author_info_model->get_graph_data($query);
+					$data["json"]=$json;
+					break;
+				case "author-activity":
+					$json=$this->Author_info_model->get_author_activity($query);
+					$data["json"]=$json;
+					break;
+				case "author-tagcloud":
+					$json=$this->Author_info_model->get_author_words($query,25);
+					$data["json"]=$json;
+					break;
+				case "paper-citations":
+					$json=$this->Paper_info_model->get_citations_yearly($query);
+					$data["json"]=$json;
+					break;
+				case "conference-papers":
+					$json=$this->Conference_info_model->get_papers_num_yearly($query);
+					$data["json"]=$json;
+					break;
+				default:
+					break;
+			}
 		}
-		$data=array();
-		$json=array();
-		switch($type){
-			case "author-relation":
-				$json=$this->Author_info_model->get_graph_data($query);
-				$data["json"]=$json;
-				$this->load->view("templates/json.php",$data);
-				break;
-			case "author-activity":
-				$json=$this->Author_info_model->get_author_activity($query);
-				$data["json"]=$json;
-				$this->load->view("templates/json.php",$data);
-				break;
-			case "author-tagcloud":
-				$json=$this->Author_info_model->get_author_words($query,25);
-				$data["json"]=$json;
-				$this->load->view("templates/json.php",$data);
-				break;
-			case "paper-citations":
-				$json=$this->Paper_info_model->get_citations_yearly($query);
-				$data["json"]=$json;
-				$this->load->view("templates/json.php",$data);
-				break;
-			default:
-				break;
-		}
+		$this->load->view("templates/json.php",$data);
 	}
 
 }
