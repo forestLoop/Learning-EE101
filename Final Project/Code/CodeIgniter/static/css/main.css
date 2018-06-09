@@ -498,6 +498,28 @@ td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
     list-style: none;
 }
 
+.conferencePaperTitle{
+    width:40%;
+}
+
+.conferencePaperYear,.conferencePaperCitations{
+    width:15%;
+    text-align: center;
+}
+
+.conferencePaperAuthors{
+    width:30%;
+}
+
+.conferencePaperAuthors ol{
+    padding-left: 25px;
+}
+
+#conferencePapersYearly{
+    margin-bottom: 60px;
+}
+
+
 
 /* Others*/
 
