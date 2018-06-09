@@ -9,6 +9,7 @@ class Page extends CI_Controller{
             $this->load->model('Author_info_model');
             $this->load->model('Paper_info_model');
             $this->load->model('Conference_info_model');
+            $this->load->model('Affiliation_info_model');
             $this->load->helper('url_helper');
     }
 
@@ -287,6 +288,45 @@ class Page extends CI_Controller{
             }
             $this->load->view("templates/footer.php");
         }
+    }
+
+    public function affiliation($affiliationID=NULL)
+    {
+        if(!$affiliationID){
+            $data["title"]="Error!";
+            $data["errorMsg"]="Invalid Affiliation ID!";
+            $this->load->view("templates/header.php",$data);
+            $this->load->view("templates/error.php",$data);
+            $this->load->view("templates/footer.php");
+        }else{
+            $data["basicInfo"]=$this->Affiliation_info_model->get_basic_info($affiliationID);
+            if(!$data["basicInfo"]){
+                $data["title"]="Error!";
+                $data["errorMsg"]="Can't Find This Affiliation!";
+                $this->load->view("templates/header.php",$data);
+                $this->load->view("templates/error.php",$data);
+            }else{
+                $data["title"]=ucwords($data["basicInfo"]["affiliationName"]);
+                $data["topAuthors"]=$this->Affiliation_info_model->get_top_authors($affiliationID,0,15);
+                $data["topPapersOfAffiliation"]=$this->Affiliation_info_model->get_top_papers($affiliationID);
+                $pageSize=10;
+                $topPapersOfAffiliationMaxPage=(int)(($data["basicInfo"]["paperNum"]-1)/$pageSize)+1;
+                $data["topPapersOfAffiliationMaxPage"]=$topPapersOfAffiliationMaxPage;
+                $data["topPapersOfAffiliationCurrentPage"]=1;
+                $data["script"]="
+                var affiliationID='$affiliationID';
+
+                var topPapersOfAffiliationCurrentPage=1;
+                var topPapersOfAffiliationMaxPage=$topPapersOfAffiliationMaxPage;
+                var topPapersOfAffiliationPageSize=$pageSize;
+                var topPapersOfAffiliationApiUrl='/api/get_papers/affiliation';
+                $(function(){checkButtonStatus('topPapersOfAffiliation')});
+                ";
+                $this->load->view("templates/header.php",$data);
+                $this->load->view("templates/Affiliation.php",$data);
+            }
+            $this->load->view("templates/footer.php");
+        }     
     }
 }
 
