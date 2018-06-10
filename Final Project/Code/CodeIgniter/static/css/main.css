@@ -91,13 +91,13 @@ td{
 }
 
 /*Navigation Bar*/
-#navBar{
+#myNavBar{
     /*position: fixed;
     top: 0;*/
     width:100%;
 }
 
-#navBar ul {
+#myNavBar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -105,15 +105,15 @@ td{
     background-color: #333;
 }
 
-#navBar li {
+#myNavBar li {
     float: left;
 }
 
-#navBar .active{
+#myNavBar .active{
     background-color: #1abc9c;
 }
 
-#navBar li a {
+#myNavBar li a {
     display: block;
     color: white;
     text-align: center;
@@ -121,7 +121,7 @@ td{
     text-decoration: none;
 }
 
-#navBar li a:hover {
+#myNavBar li a:hover {
     background-color: #1abc9c;
 }
 
@@ -544,7 +544,6 @@ td.paperPageTitle,td.paperPageYear,td.paperPageConference,td.paperPageCitations{
 .affiliationPaperAuthors ol{
     padding-left: 25px;
 }
-
 
 /* Others*/
 
