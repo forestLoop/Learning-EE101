@@ -191,7 +191,7 @@ class Page extends CI_Controller{
                 $this->load->view("templates/header.php",$data);
                 $this->load->view("templates/error.php",$data);
             }else{
-                $data["title"]=ucwords($data["author_info"]["authorName"])."'s Page";
+                $data["title"]="Author: ".ucwords($data["author_info"]["authorName"]);
                 $this->load->view("templates/header.php",$data);
                 $this->load->view("templates/author.php",$data);
             }
@@ -217,7 +217,7 @@ class Page extends CI_Controller{
                 $this->load->view("templates/header.php",$data);
                 $this->load->view("templates/error.php",$data);
             }else{
-                $data["title"]=ucwords($data["paperInfo"]["title"]);
+                $data["title"]="Paper: ".ucwords($data["paperInfo"]["title"]);
                 $data["papersCitingThis"]=$this->Paper_info_model->get_papers_citing_this($paperID);
                 $data["papersCitedByThis"]=$this->Paper_info_model->get_papers_cited_by_this($paperID);
                 $data["papersCitingThisNum"]=$this->Paper_info_model->get_number_papers_citing_this($paperID);
@@ -267,7 +267,7 @@ class Page extends CI_Controller{
                 $this->load->view("templates/header.php",$data);
                 $this->load->view("templates/error.php",$data);
             }else{
-                $data["title"]=ucwords($data["basicInfo"]["conferenceName"]);
+                $data["title"]="Conference: ".ucwords($data["basicInfo"]["conferenceName"]);
                 $data["topAuthors"]=$this->Conference_info_model->get_top_authors($conferenceID,0,15);
                 $data["topPapersOfConference"]=$this->Conference_info_model->get_top_papers($conferenceID);
                 $pageSize=10;
@@ -306,7 +306,7 @@ class Page extends CI_Controller{
                 $this->load->view("templates/header.php",$data);
                 $this->load->view("templates/error.php",$data);
             }else{
-                $data["title"]=ucwords($data["basicInfo"]["affiliationName"]);
+                $data["title"]="Affiliation: ".ucwords($data["basicInfo"]["affiliationName"]);
                 $data["topAuthors"]=$this->Affiliation_info_model->get_top_authors($affiliationID,0,15);
                 $data["topPapersOfAffiliation"]=$this->Affiliation_info_model->get_top_papers($affiliationID);
                 $pageSize=10;
@@ -327,6 +327,11 @@ class Page extends CI_Controller{
             }
             $this->load->view("templates/footer.php");
         }     
+    }
+
+    public function about()
+    {
+        $this->load->view("templates/about.php");
     }
 }
 

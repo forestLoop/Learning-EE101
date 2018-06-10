@@ -56,6 +56,7 @@ $route['author/(:any)']='page/author/$1';
 $route['paper/(:any)']='page/paper/$1';
 $route['conference/(:any)']='page/conference/$1';
 $route['affiliation/(:any)']='page/affiliation/$1';
+$route['about']='page/about';
 
 $route['(:any)'] = 'page/$1';
 $route['404_override'] = '';

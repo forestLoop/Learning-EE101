@@ -21,7 +21,7 @@
     ?>
 </head>
 <body>
-    <div id="navBar">
+    <div id="myNavBar">
         <ul>
             <li><a class="active" href="/">Home</a></li>
             <li><a href="/author/7E61D5F6">Author</a></li>
