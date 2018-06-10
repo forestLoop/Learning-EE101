@@ -89,7 +89,7 @@ class Conference_info_model extends CI_Model{
 			array_push($result, array("year"=>(int)$row["year"],"num"=>(int)$row["num"]));
 			$prevYear=(int)$row["year"];
 		}
-		array_push($result, array("year"=>$prevYear+1,"num"=>0));
+		// array_push($result, array("year"=>$prevYear+1,"num"=>0));
 		return $result;
 	}
 

@@ -24,10 +24,10 @@
     <div id="navBar">
         <ul>
             <li><a class="active" href="/">Home</a></li>
-            <li><a href="/author">Author</a></li>
-            <li><a href="/paper">Paper</a></li>
-            <li><a href="/conference">Conference</a></li>
-            <li><a href="/affiliation">Affiliation</a></li>
+            <li><a href="/author/7E61D5F6">Author</a></li>
+            <li><a href="/paper/80DD088B">Paper</a></li>
+            <li><a href="/conference/465F7C62">Conference</a></li>
+            <li><a href="/affiliation/0AE9651A">Affiliation</a></li>
             <li style="float:right;"><a href="/about">About</a></li>
         </ul>
     </div>

@@ -323,7 +323,7 @@ class Page extends CI_Controller{
                 $(function(){checkButtonStatus('topPapersOfAffiliation')});
                 ";
                 $this->load->view("templates/header.php",$data);
-                $this->load->view("templates/Affiliation.php",$data);
+                $this->load->view("templates/affiliation.php",$data);
             }
             $this->load->view("templates/footer.php");
         }     
