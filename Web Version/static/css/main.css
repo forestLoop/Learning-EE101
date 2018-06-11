@@ -6,8 +6,7 @@
 
 /*General*/
 /*@import url('https://fonts.googleapis.com/css?family=Quicksand');*/
-/*@import url(http://fonts.font.im/css?family=Quicksand);*/
-@import url(http://fonts.loli.net/css?family=Quicksand);    /*After some tests,this is the fastest one */
+@import url(http://fonts.loli.net/css?family=Quicksand);
 body{
     background-image: url(/static/img/bg.png);
     font-size: 25px;
@@ -16,6 +15,12 @@ body{
     height:100%;
     min-width: 1300px;
     margin:0;
+}
+
+.beacon{
+    color:white;
+    background-color: #1abc9c;
+    border-radius: 15px;
 }
 
 a {

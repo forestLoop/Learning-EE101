@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="/static/favicon.ico" />
-    <link rel="bookmark"href="/static/favicon.ico" />
+    <link rel="bookmark" href="/static/favicon.ico" />
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/main.css">
     <title>About</title>
@@ -21,7 +21,7 @@
 </div>
 <div class="jumbotron" style="margin-top: 60px;">
     <div class="container" >
-        <h1>Academic Search Website</h1>
+        <h1>The<span class="beacon">Beacon</span>, an academic search website.</h1>
         <h1><small>Version 1.0</small></h1>
         <p>Developed by Keith Null(Wu Zhengke).</p>
         <p>The final project of Course EE101 in June, 2018.</p>
