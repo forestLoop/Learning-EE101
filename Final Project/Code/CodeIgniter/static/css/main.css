@@ -17,6 +17,12 @@ body{
     margin:0;
 }
 
+.beacon{
+    color:white;
+    background-color: #1abc9c;
+    border-radius: 15px;
+}
+
 a {
     text-decoration: none;
     color:#1abc9c;

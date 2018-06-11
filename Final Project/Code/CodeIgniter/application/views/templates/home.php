@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     -->
     <link rel="shortcut icon" href="/static/favicon.ico" />
-    <link rel="bookmark"href="/static/favicon.ico" />
+    <link rel="bookmark" href="/static/favicon.ico" />
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link href="/static/css/jquery-ui.css" rel="stylesheet">
@@ -20,11 +20,12 @@
     <?php echo validation_errors('<div class="error" align="center">','</div>'); ?>
     <div id="magicWrapper">
     <div id="superCenter" align="center">
-        <h1>Home</h1>
+        <h1 style="font-size: 60px;" >
+            <span>The</span><span class="beacon">Beacon</span>
+        </h1>
         <div id="homeSearch" align="center">
             <?php echo form_open('/'); ?>
-                <input type="text" id="homeInput" name="queryString" placeholder="What do you want to search?">
-                <input type="submit" id="homeSubmit" value="Search">
+                <input type="text" id="homeInput" name="queryString" placeholder="What do you want to search?"><input type="submit" id="homeSubmit" value="Search">
                 <br>
                 <div id="searchType">
                     <label for="author">

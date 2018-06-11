@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/css/jquery-ui.css">
     <link rel="stylesheet" href="/static/css/main.css">
     <link rel="shortcut icon" href="/static/favicon.ico" />
-    <link rel="bookmark"href="/static/favicon.ico" />
+    <link rel="bookmark" href="/static/favicon.ico" />
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.bootcss.com/d3/4.13.0/d3.min.js"></script>
