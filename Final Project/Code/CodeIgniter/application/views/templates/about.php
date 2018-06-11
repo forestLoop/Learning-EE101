@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <link rel="bookmark"href="/static/favicon.ico" />
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/main.css">
     <title>About</title>

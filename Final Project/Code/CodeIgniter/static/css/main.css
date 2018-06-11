@@ -5,7 +5,8 @@
 */
 
 /*General*/
-@import url('https://fonts.googleapis.com/css?family=Quicksand');
+/*@import url('https://fonts.googleapis.com/css?family=Quicksand');*/
+@import url(http://fonts.loli.net/css?family=Quicksand);
 body{
     background-image: url(/static/img/bg.png);
     font-size: 25px;

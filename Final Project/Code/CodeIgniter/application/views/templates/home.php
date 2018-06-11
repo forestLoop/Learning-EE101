@@ -9,6 +9,8 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     -->
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <link rel="bookmark"href="/static/favicon.ico" />
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <link href="/static/css/jquery-ui.css" rel="stylesheet">
