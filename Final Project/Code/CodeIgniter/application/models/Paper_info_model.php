@@ -136,7 +136,7 @@
 				array_push($result, array("year"=>(int)$row["year"],"citations"=>(int)$row["num"]));
 				$prevYear=(int)$row["year"];
 			}
-			array_push($result, array("year"=>$prevYear+1,"citations"=>0));
+			//array_push($result, array("year"=>$prevYear+1,"citations"=>0));
 			return $result;
 		}
 
